@@ -6,9 +6,8 @@ conn = PG.connect( dbname: 'postgres', host: 'rblabs-postgres', user: 'postgres'
 
 get '/tests' do
   content_type :json
-  byebug
-  puts conn.exec("SELECT * FROM tests;").to_a
-  'Hello world!'
+  result = conn.exec("SELECT * FROM tests;").to_a
+  result.to_json
 end
 
 get '/hello' do
