@@ -18,7 +18,7 @@ Proceed with caution.
 `docker run --rm --name rblabs-postgres -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=postgres -d -p 127.0.0.1:5432:5432 --network rblabs-network postgres`
 
 ##### Ruby
-`docker run --rm -v ./ruby:/app -d -w /app -p 127.0.0.1:3000:3000 --network rblabs-network ruby bash -c "bundle install && ruby import_from_csv.rb && ruby server.rb puma -o 0.0.0.0 -p 3000"`
+`docker run --rm -v ./ruby:/app -it -w /app -p 127.0.0.1:3000:3000 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby import_from_csv.rb && ruby server.rb puma -o 0.0.0.0 -p 3000"`
 
 #### Instruções
 
@@ -63,7 +63,7 @@ Expected response:
     "patient_state": "Alagoas",
     "doctor_crm": "B000BJ20J4",
     "doctor_crm_state": "PI",
-    "doctor_name": "Maria Luiza Pires",
+    "doctor_name": "John Doe Carvalho",
     "doctor_email": "denna@wisozk.biz",
     "exam_token": "IQCZ17",
     "exam_date": "2021-08-05",
@@ -82,7 +82,7 @@ Expected response:
     "patient_state": "Alagoas",
     "doctor_crm": "B000BJ20J4",
     "doctor_crm_state": "PI",
-    "doctor_name": "Maria Luiza Pires",
+    "doctor_name": "John Doe Carvalho",
     "doctor_email": "denna@wisozk.biz",
     "exam_token": "IQCZ17",
     "exam_date": "2021-08-05",
@@ -101,7 +101,7 @@ Expected response:
     "patient_state": "Alagoas",
     "doctor_crm": "B000BJ20J4",
     "doctor_crm_state": "PI",
-    "doctor_name": "Maria Luiza Pires",
+    "doctor_name": "John Doe Carvalho",
     "doctor_email": "denna@wisozk.biz",
     "exam_token": "IQCZ17",
     "exam_date": "2021-08-05",

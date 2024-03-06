@@ -1,6 +1,5 @@
 require 'sinatra'
 require 'pg'
-require 'byebug'
 
 conn = PG.connect( dbname: 'postgres', host: 'rblabs-postgres', user: 'postgres', password: '123456' )
 
