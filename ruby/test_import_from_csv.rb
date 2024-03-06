@@ -2,7 +2,7 @@ require 'csv'
 require 'pg'
 
 def import_from_csv
-  conn = PG.connect( dbname: 'postgres', host: 'rblabs-postgres', user: 'postgres', password: '123456' )
+  conn = PG.connect( dbname: 'test', host: 'rblabs-postgres', user: 'postgres', password: '123456' )
   puts 'Connection stablished'
   conn.exec("CREATE TABLE IF NOT EXISTS tests ( id SERIAL PRIMARY KEY,
                                   patient_cpf VARCHAR(20) NOT NULL,
