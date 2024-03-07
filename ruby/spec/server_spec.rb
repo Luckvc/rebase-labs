@@ -21,7 +21,6 @@ describe 'Server' do
   it '/tests' do
     import_from_csv
     
-    conn = PG.connect( dbname: 'test', host: 'rblabs-postgres', user: 'postgres', password: '123456' )
     get '/tests'
 
     expect(last_response.content_type).to eq 'application/json'

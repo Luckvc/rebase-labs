@@ -2,7 +2,7 @@ require 'sinatra'
 require 'pg'
 require 'byebug'
 
-conn = PG.connect( dbname: 'postgres', host: 'rblabs-postgres', user: 'postgres', password: '123456' )
+conn = PG.connect( dbname: 'development', host: 'rblabs-postgres', user: 'admin', password: '123456' )
 
 get '/tests' do
   content_type 'application/json'
