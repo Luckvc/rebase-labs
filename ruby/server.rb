@@ -7,6 +7,7 @@ puts "conected to #{dbname} database" if conn
 
 get '/tests' do
   content_type 'application/json'
+  response.headers['Access-Control-Allow-Origin'] = '*'
   result = conn.exec("SELECT * FROM tests;").to_a
   result.to_json
 end
