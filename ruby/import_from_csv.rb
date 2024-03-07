@@ -2,7 +2,8 @@ require 'csv'
 require 'pg'
 
 def import_from_csv
-  conn = PG.connect(dbname: ENV['RACK_ENV'], host: 'rblabs-postgres', user: 'admin', password: '123456')
+  dbname = ENV['RACK_ENV'] || 'development'
+  conn = PG.connect(dbname: dbname, host: 'rblabs-postgres', user: 'admin', password: '123456')
 
   rows = CSV.read("data.csv", col_sep: ';')
 
