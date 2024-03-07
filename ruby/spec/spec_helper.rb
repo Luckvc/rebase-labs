@@ -18,11 +18,12 @@ RSpec.configure do |config|
   config.before(:all) do
     conn = PG.connect(dbname: 'test', host: 'rblabs-postgres', user: 'admin', password: '123456')
     conn.exec("TRUNCATE TABLE tests;")
+    conn.close
   end
 
   config.after(:each) do
     conn = PG.connect(dbname: 'test', host: 'rblabs-postgres', user: 'admin', password: '123456')
     conn.exec("TRUNCATE TABLE tests;")
+    conn.close
   end
-
 end
