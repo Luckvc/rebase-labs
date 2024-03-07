@@ -1,8 +1,7 @@
 require 'spec_helper'
 require 'pg'
 require 'csv'
-require 'byebug'
-require_relative '../test_import_from_csv'
+require_relative '../import_from_csv'
 require_relative '../server'
 
 

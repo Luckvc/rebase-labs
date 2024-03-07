@@ -1,12 +1,11 @@
 require 'sinatra'
 require 'pg'
-require 'byebug'
 
-dbname = ENV['RACK_ENV']
+dbname = ENV['RACK_ENV'] || 'development'
 conn = PG.connect( dbname: dbname, host: 'rblabs-postgres', user: 'admin', password: '123456' )
+puts "conected to #{dbname} database" if conn
 
 get '/tests' do
-  puts dbname
   content_type 'application/json'
   result = conn.exec("SELECT * FROM tests;").to_a
   result.to_json
