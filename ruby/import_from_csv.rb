@@ -1,5 +1,7 @@
 require 'csv'
 require 'pg'
+require 'require_all'
+require_all 'models'
 
 def import_from_csv
   dbname = ENV['RACK_ENV'] || 'development'
@@ -17,6 +19,7 @@ def import_from_csv
   end
 
   puts 'importing data...' unless ENV['RACK_ENV'] == 'test'
+
   rows.each do |row|
     conn.exec("INSERT INTO tests (patient_cpf, 
                                   patient_name, 

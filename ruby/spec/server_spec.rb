@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pg'
 require 'csv'
 require_relative '../import_from_csv'
 require_relative '../server'
