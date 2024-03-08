@@ -12,29 +12,16 @@ Proceed with caution.
 
 - Docker
 
-#### Containers
-
-##### Postgres
-`docker run --rm --name rblabs-postgres -v ./dataset/init.sql:/docker-entrypoint-initdb.d/init.sql -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=admin -d -p 127.0.0.1:5432:5432 --network rblabs-network postgres`
-
-##### Ruby
-`docker run --rm --name rblabs-backend  -v ./ruby:/app -it -w /app -p 127.0.0.1:9292:9292 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby import_from_csv.rb && ruby server.rb puma -o 0.0.0.0 -p 9292"`
-
-##### Frontend
-`docker run --rm --name rblabs-frontend -v ./frontend:/app -it -w /app -p 127.0.0.1:3000:3000 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby server.rb puma -o 0.0.0.0 -p 3000"`
-
 #### Instruções
 
 1. Baixe e entre no repositório localmente
 `git clone https://github.com/Luckvc/rebase-labs.git`
 `cd rebase-labs`
 
-2. Crie a network para os containers se comunicarem
-`docker network create -d bridge rblabs-network`
+2. Execute o comando para criar os containers
+`docker compose up`
 
-3. Execute os comandos acima para iniciar os containers.
-
-4. Acesse o website pelo endereço `http://localhost:3000`
+3. Acesse o website pelo endereço `http://localhost:3000/index`
 
 
 ## Endpoints

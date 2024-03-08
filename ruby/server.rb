@@ -2,7 +2,7 @@ require 'sinatra'
 require 'pg'
 
 dbname = ENV['RACK_ENV'] || 'development'
-conn = PG.connect( dbname: dbname, host: 'rblabs-postgres', user: 'admin', password: '123456' )
+conn = PG.connect( dbname: dbname, host: 'postgres', user: 'admin', password: '123456' )
 puts "conected to #{dbname} database" if conn
 
 get '/tests' do
