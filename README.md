@@ -18,7 +18,10 @@ Proceed with caution.
 `docker run --rm --name rblabs-postgres -v ./dataset/init.sql:/docker-entrypoint-initdb.d/init.sql -e POSTGRES_PASSWORD=123456 -e POSTGRES_USER=admin -d -p 127.0.0.1:5432:5432 --network rblabs-network postgres`
 
 ##### Ruby
-`docker run --rm -v ./ruby:/app -it -w /app -p 127.0.0.1:3000:3000 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby import_from_csv.rb && ruby server.rb puma -o 0.0.0.0 -p 3000"`
+`docker run --rm --name rblabs-backend  -v ./ruby:/app -it -w /app -p 127.0.0.1:9292:9292 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby import_from_csv.rb && ruby server.rb puma -o 0.0.0.0 -p 9292"`
+
+##### Frontend
+`docker run --rm --name rblabs-frontend -v ./frontend:/app -it -w /app -p 127.0.0.1:3000:3000 -v ~/.bundle:/usr/local/bundle --network rblabs-network ruby bash -c "bundle install && ruby server.rb puma -o 0.0.0.0 -p 3000"`
 
 #### Instruções
 
@@ -31,10 +34,12 @@ Proceed with caution.
 
 3. Execute os comandos acima para iniciar os containers.
 
-4. Use a URL base `localhost:3000` para acessar os endpoints
+4. Acesse o website pelo endereço `http://localhost:3000`
 
 
 ## Endpoints
+
+URL base `http://localhost:9292`
 
 - `/hello`
 
