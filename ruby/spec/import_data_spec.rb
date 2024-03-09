@@ -9,9 +9,9 @@ describe 'Import data from csv' do
     allow(CSV).to receive(:read).and_return(test_data)
     import_from_csv
 
-    expect(Patient.count).to eq 3
-    expect(Exam.count).to eq 3
-    expect(Doctor.count).to eq 3
-    expect(Test.count).to eq 3
+    expect(Patient.all(@conn).count).to eq 3
+    expect(Exam.all(@conn).count).to eq 3
+    expect(Doctor.all(@conn).count).to eq 3
+    expect(Test.all(@conn).count).to eq 3
   end
 end

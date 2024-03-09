@@ -1,9 +1,10 @@
 require_relative '../repositories/repository'
 
 class Patient < Repository
-  attr_accessor :cpf, :name, :email, :birthdate, :address, :city, :state
+  attr_accessor :id, :cpf, :name, :email, :birthdate, :address, :city, :state
 
-  def initialize(cpf, name, email, birthdate, address, city, state)
+  def initialize(id:, cpf:, name:, email:, birthdate:, address:, city:, state:)
+    @id = id
     @cpf = cpf
     @name = name
     @email = email
@@ -11,7 +12,9 @@ class Patient < Repository
     @address = address
     @city = city
     @state = state
-    @exams = []
+  end
+
+  def patient_exams
   end
 end
 
