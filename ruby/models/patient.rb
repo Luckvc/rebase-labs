@@ -14,7 +14,8 @@ class Patient < Repository
     @state = state
   end
 
-  def patient_exams
+  def exams
+    conn.exec("SELECT * FROM exams WHERE patient_id = '#{@id}'").entries
   end
 end
 

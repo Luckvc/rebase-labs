@@ -15,6 +15,12 @@ class Repository
 
     create_object(result) if result
   end
+
+  def self.find_by_id(id, conn)
+    result = conn.exec("SELECT * FROM #{table_name} WHERE id = '#{id}'").entries[0]
+
+    create_object(result) if result
+  end
   
   def self.create(attributes, conn)
     result = conn.exec("INSERT INTO #{table_name()} (#{attributes.keys.join(', ')})
@@ -26,6 +32,14 @@ class Repository
 
   def self.find_or_create(attributes, conn)
 
+  end
+
+  def instance_attributes
+    result = {}
+    self.instance_variables.each do |attribute| 
+      result[attribute.to_s.delete("@")] = self.instance_variable_get(attribute) 
+    end
+    result
   end
 
   private

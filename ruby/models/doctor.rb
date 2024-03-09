@@ -13,11 +13,10 @@ class Doctor < Repository
 
   def self.find_by(crm, crm_state, conn)
     result = conn.exec("SELECT * FROM doctors WHERE crm = '#{crm}' AND crm_state = '#{crm_state}'").entries[0]
-
     create_object(result) if result
   end
   
-  def doctor_exams
-    
+  def exams
+    conn.exec("SELECT * FROM exams WHERE doctor_id = '#{@id}'").entries
   end
 end

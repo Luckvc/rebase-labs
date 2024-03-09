@@ -19,7 +19,7 @@ class Exam < Repository
     Test.new(**attributes)
   end
 
-  def tests
-    
+  def tests(conn)
+    conn.exec("SELECT * FROM tests WHERE exam_id = '#{@id}'").entries
   end
 end
