@@ -56,3 +56,5 @@ def import_from_csv
   puts 'data imported.' unless ENV['RACK_ENV'] == 'test'
   conn.close
 end
+
+import_from_csv
