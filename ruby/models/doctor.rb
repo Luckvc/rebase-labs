@@ -11,12 +11,19 @@ class Doctor < Repository
     @email = email
   end
 
-  def self.find_by(crm, crm_state, conn)
+  def self.find_by_crm_and_state(crm, crm_state, conn)
     result = conn.exec("SELECT * FROM doctors WHERE crm = '#{crm}' AND crm_state = '#{crm_state}'").entries[0]
-    create_object(result) if result
+    return create_object(result) if result
+
+    nil
   end
   
-  def exams
-    conn.exec("SELECT * FROM exams WHERE doctor_id = '#{@id}'").entries
+  def exams(conn)
+    results = conn.exec("SELECT * FROM exams WHERE doctor_id = '#{@id}'").entries
+    if results
+      results.map do |result|
+        Exam.create_object(result)
+      end
+    end
   end
 end

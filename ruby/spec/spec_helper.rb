@@ -1,4 +1,5 @@
 require 'rack/test'
+require 'pg'
 
 ENV['RACK_ENV'] = 'test'
 

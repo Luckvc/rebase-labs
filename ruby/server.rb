@@ -23,7 +23,7 @@ get '/tests' do
     exam_hash.delete('doctor_id')
     exam_hash['doctor'] = doctor.instance_attributes
 
-    exam_hash['tests'] = exam.tests(conn)
+    exam_hash['tests'] = exam.tests(conn).map { |test| test.instance_attributes}
     exam_hash
   end
   exams.to_json

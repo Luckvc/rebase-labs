@@ -12,8 +12,9 @@ class Repository
   
   def self.find_by(field, value, conn)
     result = conn.exec("SELECT * FROM #{table_name} WHERE #{field} = '#{value}'").entries[0]
+    return create_object(result) if result
 
-    create_object(result) if result
+    nil
   end
 
   def self.find_by_id(id, conn)
@@ -28,10 +29,6 @@ class Repository
                         RETURNING *", attributes.values).entries[0]
 
     create_object(result) if result
-  end
-
-  def self.find_or_create(attributes, conn)
-
   end
 
   def instance_attributes

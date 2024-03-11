@@ -20,6 +20,11 @@ class Exam < Repository
   end
 
   def tests(conn)
-    conn.exec("SELECT * FROM tests WHERE exam_id = '#{@id}'").entries
+    results = conn.exec("SELECT * FROM tests WHERE exam_id = '#{@id}'").entries
+    if results
+      results.map do |result|
+        Test.create_object(result)
+      end
+    end
   end
 end
