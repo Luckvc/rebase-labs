@@ -1,4 +1,5 @@
 require 'rack/test'
+require 'pg'
 
 ENV['RACK_ENV'] = 'test'
 
@@ -16,14 +17,15 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before(:all) do
-    conn = PG.connect(dbname: 'test', host: 'postgres', user: 'admin', password: '123456')
-    conn.exec("TRUNCATE TABLE tests;")
-    conn.close
+    @conn = PG.connect(dbname: 'test', host: 'postgres', user: 'admin', password: '123456')
+    @conn.exec("TRUNCATE TABLE patients, doctors, exams, tests;")
   end
 
+  config.after(:all) do
+    @conn.close
+  end
+  
   config.after(:each) do
-    conn = PG.connect(dbname: 'test', host: 'postgres', user: 'admin', password: '123456')
-    conn.exec("TRUNCATE TABLE tests;")
-    conn.close
+    @conn.exec("TRUNCATE TABLE patients, doctors, exams, tests;")
   end
 end
