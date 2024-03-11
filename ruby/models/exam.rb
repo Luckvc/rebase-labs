@@ -27,4 +27,19 @@ class Exam < Repository
       end
     end
   end
+
+  def hash_exam(conn)
+    exam_hash = self.instance_attributes
+
+    patient = Patient.find_by_id(exam_hash['patient_id'], conn)
+    exam_hash.delete('patient_id')
+    exam_hash['patient'] = patient.instance_attributes
+    
+    doctor = Doctor.find_by_id(exam_hash['doctor_id'], conn)
+    exam_hash.delete('doctor_id')
+    exam_hash['doctor'] = doctor.instance_attributes
+
+    exam_hash['tests'] = self.tests(conn).map { |test| test.instance_attributes}
+    exam_hash
+  end
 end

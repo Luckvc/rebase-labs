@@ -1,38 +1,28 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exames</title>
+  <title>Rebase Labs</title>
 </head>
 <body>
-  <h1>Exames</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>cpf</th>
-        <th>nome paciente</th>
-        <th>email paciente</th>
-        <th>data nascimento paciente</th>
-        <th>endereço/rua paciente</th>
-        <th>cidade paciente</th>
-        <th>estado patiente</th>
-        <th>crm médico</th>
-        <th>crm médico estado</th>
-        <th>nome médico</th>
-        <th>email médico</th>
-        <th>token resultado exame</th>
-        <th>data exame</th>
-        <th>tipo exame</th>
-        <th>limites tipo exame</th>
-        <th>resultado tipo exame</th>
-      </tr>
-    </thead>
-    <tbody id="table-body">
+  <div>
+    <h1>Rebase Labs</h1>
+  </div>
 
-    </tbody>
-  </table>
-  <script src="main.js"></script>
+  <div>
+    <h3>Exames</h3>
+    <form action="search">
+      <label for="token">Procurar por Token:</label>
+      <input type="text" id="token" name="token">
+      <input type="submit" value="Submit">
+    </form>
+  </div>
+
+  <div>
+    <h3><a href="exams">Todos os Exames</a></h3>
+  </div>
+
+
 </body>
 </html>
-
