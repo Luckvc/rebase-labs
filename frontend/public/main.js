@@ -1,6 +1,3 @@
-const fragment = new DocumentFragment();
-const url = 'http://localhost:9292/tests';
-
 document.addEventListener("DOMContentLoaded", loadExams());
 
 

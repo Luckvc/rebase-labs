@@ -3,26 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
   <title>Rebase Labs</title>
 </head>
 <body>
-  <div>
-    <h1>Rebase Labs</h1>
+  <nav class="navbar">
+    <div class="rebase_labs">Rebase Labs</div>
+    <div class="navbar-right">
+      <a class="all_exams">Lista de Exames</a>
+      <form class="search-form">
+        <input type="text" placeholder="AB12C3">
+        <button type="submit">Procurar</button>
+      </form>
+    </div>
+  </nav>
+  <div class="content">
+    <h1 class="page-title">Exames</h1>
+    <table class="exam-table">
+      <thead class="table-head">
+        <tr>
+          <th>Nome do Paciente</th>
+          <th>Nome Médico</th>
+          <th>Token do Exame</th>
+          <th>Data do Exame</th>
+        </tr>
+      </thead>
+      <tbody id="table-body" class="table-body">
+      </tbody>
+    </table>
   </div>
-
-  <div>
-    <h3>Exames</h3>
-    <form action="search">
-      <label for="token">Procurar por Token:</label>
-      <input type="text" id="token" name="token">
-      <input type="submit" value="Submit">
-    </form>
-  </div>
-
-  <div>
-    <h3><a href="exams">Todos os Exames</a></h3>
-  </div>
-
-
+  <script src="main.js"></script>
 </body>
 </html>
