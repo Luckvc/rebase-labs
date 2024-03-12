@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'csv'
-require_relative '../import_from_csv'
+require_relative '../data_importer'
 require_relative '../server'
 
 
@@ -21,7 +21,7 @@ describe 'Server' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
     allow(CSV).to receive(:read).and_return(test_data)
 
-    import_from_csv
+    DataImporter.import_from_csv
     
     get '/tests'
 
