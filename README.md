@@ -48,61 +48,86 @@ Content-type: `application/json`
 Expected response: 
 ```json
 [ {
-    "id": "1",
-    "patient_cpf": "000.000.000-00",
-    "patient_name": "Jane Doe Silva",
-    "patient_email": "gerald.crona@ebert-quigley.com",
-    "patient_birthdate": "2001-03-11",
-    "patient_address": "165 Rua Rafaela",
-    "patient_city": "Ituverava",
-    "patient_state": "Alagoas",
-    "doctor_crm": "B000BJ20J4",
-    "doctor_crm_state": "PI",
-    "doctor_name": "John Doe Carvalho",
-    "doctor_email": "denna@wisozk.biz",
-    "exam_token": "IQCZ17",
-    "exam_date": "2021-08-05",
-    "exam_type": "hemácias",
-    "exam_limits": "45-52",
-    "exam_result": "97"
-  },
-  {
-    "id": "2",
-    "patient_cpf": "000.000.000-00",
-    "patient_name": "Jane Doe Silva",
-    "patient_email": "gerald.crona@ebert-quigley.com",
-    "patient_birthdate": "2001-03-11",
-    "patient_address": "165 Rua Rafaela",
-    "patient_city": "Ituverava",
-    "patient_state": "Alagoas",
-    "doctor_crm": "B000BJ20J4",
-    "doctor_crm_state": "PI",
-    "doctor_name": "John Doe Carvalho",
-    "doctor_email": "denna@wisozk.biz",
-    "exam_token": "IQCZ17",
-    "exam_date": "2021-08-05",
-    "exam_type": "leucócitos",
-    "exam_limits": "9-61",
-    "exam_result": "89"
-  },
-  {
-    "id": "3",
-    "patient_cpf": "000.000.000-00",
-    "patient_name": "Jane Doe Silva",
-    "patient_email": "gerald.crona@ebert-quigley.com",
-    "patient_birthdate": "2001-03-11",
-    "patient_address": "165 Rua Rafaela",
-    "patient_city": "Ituverava",
-    "patient_state": "Alagoas",
-    "doctor_crm": "B000BJ20J4",
-    "doctor_crm_state": "PI",
-    "doctor_name": "John Doe Carvalho",
-    "doctor_email": "denna@wisozk.biz",
-    "exam_token": "IQCZ17",
-    "exam_date": "2021-08-05",
-    "exam_type": "plaquetas",
-    "exam_limits": "11-93",
-    "exam_result": "97"
-  } ]
+    "id": "303",
+    "token": "T9O6AI",
+    "date": "2021-11-21",
+    "patient": {
+      "id": "53",
+      "cpf": "066.126.400-90",
+      "name": "Matheus Barroso",
+      "email": "maricela@streich.com",
+      "birthdate": "1972-03-09",
+      "address": "9378 Rua Stella Braga",
+      "city": "Senador Elói de Souza",
+      "state": "Pernambuco"
+    },
+    "doctor": {
+      "id": "13",
+      "crm": "B000B7CDX4",
+      "crm_state": "SP",
+      "name": "Sra. Calebe Louzada",
+      "email": "kendra@nolan-sawayn.co"
+    },
+    "tests": [
+      {
+        "id": "35127",
+        "type": "hemácias",
+        "limits": "45-52",
+        "result": "48",
+        "exam_id": "303"
+      },
+      {
+        "id": "35128",
+        "type": "leucócitos",
+        "limits": "9-61",
+        "result": "75",
+        "exam_id": "303"
+      }]
+} ]
+```
 
+- `/search?token=`
+
+Endpoint: `GET`
+Params: `token`
+
+Content-type: `application/json`
+
+Expected response status 200: 
+```json
+{
+  "id": "301",
+  "token": "IQCZ17",
+  "date": "2021-08-05",
+  "patient": {
+    "id": "51",
+    "cpf": "048.973.170-88",
+    "name": "Emilly Batista Neto",
+    "email": "gerald.crona@ebert-quigley.com",
+    "birthdate": "2001-03-11",
+    "address": "165 Rua Rafaela",
+    "city": "Ituverava",
+    "state": "Alagoas"
+  },
+  "doctor": {
+    "id": "11",
+    "crm": "B000BJ20J4",
+    "crm_state": "PI",
+    "name": "Maria Luiza Pires",
+    "email": "denna@wisozk.biz"
+  },
+  "tests": [
+    {
+      "id": "35101",
+      "type": "hemácias",
+      "limits": "45-52",
+      "result": "97",
+      "exam_id": "301"
+    }]
+}
+```
+
+Expected response status 404: 
+```json
+{}
 ```

@@ -1,38 +1,92 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Exames</title>
+  <link rel="stylesheet" href="style.css">
+  <title>Rebase Labs</title>
 </head>
 <body>
-  <h1>Exames</h1>
-  <table>
-    <thead>
-      <tr>
-        <th>cpf</th>
-        <th>nome paciente</th>
-        <th>email paciente</th>
-        <th>data nascimento paciente</th>
-        <th>endereço/rua paciente</th>
-        <th>cidade paciente</th>
-        <th>estado patiente</th>
-        <th>crm médico</th>
-        <th>crm médico estado</th>
-        <th>nome médico</th>
-        <th>email médico</th>
-        <th>token resultado exame</th>
-        <th>data exame</th>
-        <th>tipo exame</th>
-        <th>limites tipo exame</th>
-        <th>resultado tipo exame</th>
-      </tr>
-    </thead>
-    <tbody id="table-body">
+  <nav class="navbar">
+    <div class="navbar-content">
+      <div class="rebase_labs">Rebase Labs</div>
+      <div class="navbar-right">
+        <a class="all_exams" id="all_exams_link">Lista de Exames</a>
+        <form class="search-form" id="search-form">
+          <input type="text" placeholder="AB12C3" id="search-token">
+          <button type="submit">Procurar</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  <div class="content">
+    <div class="show-exam" id="show-exam">
 
-    </tbody>
-  </table>
+    </div>
+    <div id="home-page">
+      <h1 class="page-title">Exames</h1>
+      <table class="table">
+        <thead class="table-head">
+          <tr class="table-header">
+            <th class="table-item">Nome do Paciente</th>
+            <th class="table-item">Nome Médico</th>
+            <th class="table-item">Token do Exame</th>
+            <th class="table-item">Data do Exame</th>
+          </tr>
+        </thead>
+        <tbody id="exam-table-body" class="table-body">
+        </tbody>
+      </table>
+  </div>
+  </div>
+
+  <template id="template">
+    <div id="exam-page">
+      <div class="header">
+        <h2 id="token">Exame </h2>
+        <h2 id="date">Data: </h2>
+      </div>
+
+      <div class="patient-doctor-info">
+        <div id="patient">
+          <h3>Paciente</h3>
+          <ul>  
+            <li id="patient_name">Nome: </li>
+            <li id="patient_cpf">Cpf: </li>
+            <li id="patient_email">Email: </li>
+            <li id="patient_birthdate">Data de Nascimento: </li>
+            <li id="patient_address">Endereço: </li>
+          </ul>
+        </div>
+        
+        <div id="doctor">
+          <h3>Médico</h3>
+          <ul>
+            <li id="doctor_name">Nome: </li>
+            <li id="doctor_crm">CRM: </li>
+            <li id="doctor_crm_state">Estado Expedidor: </li>
+            <li id="doctor_email">Data de Nascimento: </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="tests">
+        <h2 class="test-title">Testes</h2>
+        <table id="test-table" class="table">
+          <thead class="table-head">
+            <tr class="table-row">
+              <th class="table-item">Tipo de Exame</th>
+              <th class="table-item">Referência</th>
+              <th class="table-item">Resultado</th>
+            </tr>
+          </thead>
+          <tbody id="test-table-body" class="table-body">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </template>
   <script src="main.js"></script>
 </body>
 </html>
-

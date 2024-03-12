@@ -1,0 +1,152 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+.content {
+  margin-inline: auto;
+  width: 55vw;
+  position: relative;
+}
+
+
+.navbar {
+  background-color: #3A56DD;
+}
+
+.navbar-content {
+  background-color: #3A56DD;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-inline: auto;
+  width: 60vw;
+  position: relative;
+}
+
+.rebase_labs {
+  font-size: 24px;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.all_exams {
+  color: white;
+  border: none;
+  padding: 1rem 20px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.all_exams:hover {
+  color: white;
+  background-color: rgb(25, 26, 105);
+  cursor: pointer;
+}
+
+.search_token {
+  color: white;
+  border: none;
+  padding: 10px 10px;
+  border-radius: 5px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+}
+
+.search-form input[type="text"] {
+  padding: 8px;
+  margin-right: 5px;
+}
+
+.search-form button[type="submit"] {
+  background-color: rgb(153, 227, 153);
+  color: black;
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.search-form button:hover {
+  background-color: rgb(185, 255, 185);
+  color: black;
+}
+
+
+.page-title {
+  text-align: center;
+}
+
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.exam-table-row:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
+.table-header {
+  font-weight: bold;
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.patient-doctor-info {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
+}
+
+.not-found {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+button.token-btn {
+  all: unset;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
+
+.test-title {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
