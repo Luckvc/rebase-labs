@@ -6,18 +6,25 @@
 
 
 .content {
-  margin-inline: 23rem;
-  padding: 0.5rem 1rem;
+  margin-inline: auto;
+  width: 55vw;
+  position: relative;
 }
 
 
 .navbar {
   background-color: #3A56DD;
+}
+
+.navbar-content {
+  background-color: #3A56DD;
   color: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-inline: 23rem;
+  margin-inline: auto;
+  width: 60vw;
+  position: relative;
 }
 
 .rebase_labs {
@@ -80,7 +87,7 @@
 }
 
 
-.exam-table {
+.table {
   width: 100%;
   border-collapse: collapse;
 }
@@ -102,4 +109,20 @@
 
 tr:nth-of-type(odd) {
   background-color: #f2f2f2;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.patient-doctor-info {
+  display: flex;
+  justify-content: space-around;
+  margin: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem;
 }

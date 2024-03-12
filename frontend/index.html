@@ -8,30 +8,79 @@
 </head>
 <body>
   <nav class="navbar">
-    <div class="rebase_labs">Rebase Labs</div>
-    <div class="navbar-right">
-      <a class="all_exams">Lista de Exames</a>
-      <form class="search-form">
-        <input type="text" placeholder="AB12C3">
-        <button type="submit">Procurar</button>
-      </form>
+    <div class="navbar-content">
+      <div class="rebase_labs">Rebase Labs</div>
+      <div class="navbar-right">
+        <a class="all_exams" id="all_exams_link">Lista de Exames</a>
+        <form class="search-form">
+          <input type="text" placeholder="AB12C3">
+          <button type="submit">Procurar</button>
+        </form>
+      </div>
     </div>
   </nav>
   <div class="content">
-    <h1 class="page-title">Exames</h1>
+    <div id="exam-page">
+      <div class="header">
+        <h2 id="token">Exame </h2>
+        <h2 id="date">Data: </h2>
+      </div>
 
-    <table class="exam-table">
-      <thead class="table-head">
-        <tr class="table-row">
-          <th class="table-item table-header">Nome do Paciente</th>
-          <th class="table-item table-header">Nome Médico</th>
-          <th class="table-item table-header">Token do Exame</th>
-          <th class="table-item table-header">Data do Exame</th>
-        </tr>
-      </thead>
-      <tbody id="table-body" class="table-body">
-      </tbody>
-    </table>
+      <div class="patient-doctor-info">
+        <div id="patient">
+          <h3>Paciente</h3>
+          <ul>  
+            <li id="patient_name">Nome: </li>
+            <li id="patient_cpf">Cpf: </li>
+            <li id="patient_email">Email: </li>
+            <li id="patient_birthdate">Data de Nascimento: </li>
+            <li id="patient_address">Endereço: </li>
+          </ul>
+        </div>
+        
+        <div id="doctor">
+          <h3>Médico</h3>
+          <ul>
+            <li id="doctor_name">Nome: </li>
+            <li id="doctor_crm">CRM: </li>
+            <li id="doctor_crm_state">Estado Expedidor: </li>
+            <li id="doctor_email">Data de Nascimento: </li>
+          </ul>
+        </div>
+      </div>
+
+      <div id="tests">
+        <h3>Testes</h3>
+        <table id="test-table" class="table">
+          <thead class="table-head">
+            <tr class="table-row">
+              <th class="table-item">Tipo de Exame</th>
+              <th class="table-item">Referência</th>
+              <th class="table-item">Resultado</th>
+            </tr>
+          </thead>
+          <tbody id="test-table-body" class="table-body">
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div id="home-page">
+      <h1 class="page-title">Exames</h1>
+      <table class="table">
+        <thead class="table-head">
+          <tr class="table-row">
+            <th class="table-item table-header">Nome do Paciente</th>
+            <th class="table-item table-header">Nome Médico</th>
+            <th class="table-item table-header">Token do Exame</th>
+            <th class="table-item table-header">Data do Exame</th>
+          </tr>
+        </thead>
+        <tbody id="exam-table-body" class="table-body">
+        </tbody>
+      </table>
+  </div>
   </div>
   <script src="main.js"></script>
 </body>
