@@ -145,3 +145,8 @@ button.token-btn {
   color: blue;
   cursor: pointer;
 }
+
+.test-title {
+  margin-left: 1rem;
+  margin-top: 2rem;
+}
