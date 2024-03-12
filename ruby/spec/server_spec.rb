@@ -127,9 +127,7 @@ describe 'Server' do
 
   context '/import' do
     it 'success' do
-      data = File.read('spec/support/test_data.csv') 
-
-      post '/import', data, { 'CONTENT_TYPE' => 'Content-Type: text/csv' }
+      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
 
       expect(last_response.status).to eq 200
       expect(Patient.all(@conn).count).to eq 3

@@ -34,7 +34,7 @@ end
 
 post '/import' do
   response.headers['Access-Control-Allow-Origin'] = '*'
-  csv = CSV.parse(request.body.string, col_sep:';', headers: false)
+  csv = CSV.read(params[:file][:tempfile], col_sep:';')
   DataImporter.import_from_csv(csv)
 
   200
