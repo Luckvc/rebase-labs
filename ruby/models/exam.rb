@@ -12,11 +12,10 @@ class Exam < Repository
   end
 
   def create_test(attributes, conn)
-    result = conn.exec("INSERT INTO tests (#{attributes.keys.join(', ')}, exam_id)
-                         VALUES (#{attributes.values.map{ |value| "'" + value.to_s + "'" }.join(', ')}, '#{@id}')
-                         RETURNING *").entries[0]
-    attributes = result.transform_keys { |k| k.to_sym }
-    Test.new(**attributes)
+    test_attributes = get_or_create_test_in_db(attributes, conn)
+
+    test_attributes = test_attributes.transform_keys { |k| k.to_sym }
+    Test.new(**test_attributes)
   end
 
   def tests(conn)
@@ -41,5 +40,12 @@ class Exam < Repository
 
     exam_hash['tests'] = self.tests(conn).map { |test| test.instance_attributes}
     exam_hash
+  end
+
+  def get_or_create_test_in_db(attributes, conn)
+    conn.exec("SELECT * FROM tests WHERE type = '#{attributes['type']}' AND exam_id = '#{self.id}'").entries[0] ||
+    conn.exec("INSERT INTO tests (#{attributes.keys.join(', ')}, exam_id)
+                         VALUES (#{attributes.values.map{ |value| "'" + value.to_s + "'" }.join(', ')}, '#{@id}')
+                         RETURNING *").entries[0]
   end
 end
