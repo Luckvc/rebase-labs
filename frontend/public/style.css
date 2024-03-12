@@ -97,8 +97,15 @@
   border-bottom: 1px solid #ccc;
 }
 
+.exam-table-row:hover {
+  background-color: #ccc;
+  cursor: pointer;
+}
+
 .table-header {
   font-weight: bold;
+  display: flex;
+  border-bottom: 1px solid #ccc;
 }
 
 .table-item {

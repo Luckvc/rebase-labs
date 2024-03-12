@@ -25,6 +25,8 @@ function displayExams(exams) {
   exams.forEach(function(exam) {
       const tr = document.createElement('tr');
       tr.classList.add("table-row");
+      tr.classList.add("exam-table-row");
+      tr.addEventListener("click", function() { showExam(exam['token']) });
       
       td_tag = document.createElement('td');
       td_tag.classList.add("table-item");
@@ -38,15 +40,10 @@ function displayExams(exams) {
       td_tag.appendChild(td_text);
       tr.appendChild(td_tag);
 
-      btn_tag = document.createElement('button');
-      btn_tag.classList.add("token-btn")
-      a_text = document.createTextNode(exam['token']);
-      btn_tag.addEventListener("click", function() { showExam(exam['token']) });
-      btn_tag.appendChild(a_text);
-
       td_tag = document.createElement('td');
       td_tag.classList.add("table-item");
-      td_tag.appendChild(btn_tag);
+      td_text = document.createTextNode(exam['token']);
+      td_tag.appendChild(td_text);
       tr.appendChild(td_tag);
   
       td_tag = document.createElement('td');
