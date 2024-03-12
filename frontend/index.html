@@ -12,7 +12,7 @@
       <div class="rebase_labs">Rebase Labs</div>
       <div class="navbar-right">
         <a class="all_exams" id="all_exams_link">Lista de Exames</a>
-        <form class="search-form">
+        <form class="search-form" id="search-form">
           <input type="text" placeholder="AB12C3">
           <button type="submit">Procurar</button>
         </form>
@@ -20,6 +20,27 @@
     </div>
   </nav>
   <div class="content">
+    <div class="show-exam" id="show-exam">
+
+    </div>
+    <div id="home-page">
+      <h1 class="page-title">Exames</h1>
+      <table class="table">
+        <thead class="table-head">
+          <tr class="table-row">
+            <th class="table-item table-header">Nome do Paciente</th>
+            <th class="table-item table-header">Nome Médico</th>
+            <th class="table-item table-header">Token do Exame</th>
+            <th class="table-item table-header">Data do Exame</th>
+          </tr>
+        </thead>
+        <tbody id="exam-table-body" class="table-body">
+        </tbody>
+      </table>
+  </div>
+  </div>
+
+  <template id="template">
     <div id="exam-page">
       <div class="header">
         <h2 id="token">Exame </h2>
@@ -65,23 +86,7 @@
         </table>
       </div>
     </div>
-
-    <div id="home-page">
-      <h1 class="page-title">Exames</h1>
-      <table class="table">
-        <thead class="table-head">
-          <tr class="table-row">
-            <th class="table-item table-header">Nome do Paciente</th>
-            <th class="table-item table-header">Nome Médico</th>
-            <th class="table-item table-header">Token do Exame</th>
-            <th class="table-item table-header">Data do Exame</th>
-          </tr>
-        </thead>
-        <tbody id="exam-table-body" class="table-body">
-        </tbody>
-      </table>
-  </div>
-  </div>
+  </template>
   <script src="main.js"></script>
 </body>
 </html>

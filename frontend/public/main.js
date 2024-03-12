@@ -1,23 +1,28 @@
-document.addEventListener("DOMContentLoaded", homePage());
+document.addEventListener("DOMContentLoaded", loadHomePage ());
 document.getElementById("all_exams_link").addEventListener("click", function() { showHomePage() });
+document.getElementById("search-form").addEventListener("submit", (event) => { 
+  event.preventDefault();
+  console.log(document.querySelector("input"));
+});
 
-async function homePage() {
-  document.getElementById("exam-page").style.display = 'none';
-  loadExams();
+async function loadHomePage() {
+  exams = await loadExams();
+  displayExams(exams);
 }
 
 async function showHomePage() {
-  document.getElementById("exam-page").style.display = 'none';
+  document.getElementById("show-exam").innerHTML = "";
   document.getElementById("home-page").style.display = 'block';
 }
 
 async function loadExams() {
-
   response = await fetch('http://localhost:9292/tests');
 
-  data = await response.json();
+  return await response.json();
+}
 
-  data.forEach(function(exam) {
+function displayExams(exams) {
+  exams.forEach(function(exam) {
       const tr = document.createElement('tr');
       tr.classList.add("table-row");
       
@@ -56,29 +61,48 @@ async function loadExams() {
 }
 
 async function showExam(token) {
+  exam = await fetchExam(token);
+  loadExam(exam);
+}
+
+async function fetchExam(token) {
   response = await fetch('http://localhost:9292/tests/' + token);
+  
+  return await response.json();
+}
 
-  data = await response.json();
+function loadExam(exam) {
+  const showExamDiv = document.getElementById("show-exam");
+  const template = document.getElementById("template");
 
-  document.getElementById("exam-page").style.display = 'block';
+  const examPage = template.content.cloneNode(true);
+
   document.getElementById("home-page").style.display = 'none';
 
-  document.getElementById("token").appendChild(document.createTextNode(data['token']));
-  document.getElementById("date").appendChild(document.createTextNode(data['date']));
+  examPage.getElementById("token").appendChild(document.createTextNode(exam['token']));
+  examPage.getElementById("date").appendChild(document.createTextNode(exam['date']));
 
-  document.getElementById("patient_name").appendChild(document.createTextNode(data['patient']['name']));
-  document.getElementById("patient_cpf").appendChild(document.createTextNode(data['patient']['cpf']));
-  document.getElementById("patient_email").appendChild(document.createTextNode(data['patient']['email']));
-  document.getElementById("patient_birthdate").appendChild(document.createTextNode(data['patient']['birthdate']));
-  document.getElementById("patient_address").appendChild(document.createTextNode(data['patient']['address']));
+  examPage.getElementById("patient_name").appendChild(document.createTextNode(exam['patient']['name']));
+  examPage.getElementById("patient_cpf").appendChild(document.createTextNode(exam['patient']['cpf']));
+  examPage.getElementById("patient_email").appendChild(document.createTextNode(exam['patient']['email']));
+  examPage.getElementById("patient_birthdate").appendChild(document.createTextNode(exam['patient']['birthdate']));
+  examPage.getElementById("patient_address").appendChild(document.createTextNode(exam['patient']['address']));
 
-  document.getElementById("doctor_name").appendChild(document.createTextNode(data['doctor']['name']));
-  document.getElementById("doctor_crm").appendChild(document.createTextNode(data['doctor']['crm']));
-  document.getElementById("doctor_crm_state").appendChild(document.createTextNode(data['doctor']['crm_state']));
-  document.getElementById("doctor_email").appendChild(document.createTextNode(data['doctor']['email']));
+  examPage.getElementById("doctor_name").appendChild(document.createTextNode(exam['doctor']['name']));
+  examPage.getElementById("doctor_crm").appendChild(document.createTextNode(exam['doctor']['crm']));
+  examPage.getElementById("doctor_crm_state").appendChild(document.createTextNode(exam['doctor']['crm_state']));
+  examPage.getElementById("doctor_email").appendChild(document.createTextNode(exam['doctor']['email']));
 
-  data['tests'].forEach(function(test) {
-    const tr = document.createElement('tr');
+  exam['tests'].forEach(function(test) {
+    const element = examPage.getElementById('test-table-body')
+    element.appendChild(buildTest(test))
+  });
+
+  showExamDiv.appendChild(examPage);
+}
+
+function buildTest(test) {
+  const tr = document.createElement('tr');
     tr.classList.add("table-row");
 
     td_tag = document.createElement('td');
@@ -99,7 +123,5 @@ async function showExam(token) {
     td_tag.appendChild(td_text);
     tr.appendChild(td_tag);
 
-    const element = document.getElementById('test-table-body')
-    element.appendChild(tr)
-  });
+    return tr;
 }
