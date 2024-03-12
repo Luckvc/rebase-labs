@@ -2,7 +2,8 @@ document.addEventListener("DOMContentLoaded", loadHomePage ());
 document.getElementById("all_exams_link").addEventListener("click", function() { showHomePage() });
 document.getElementById("search-form").addEventListener("submit", (event) => { 
   event.preventDefault();
-  showExam(document.getElementById("search-token").value);
+
+  showExam(document.getElementById("search-token").value.toUpperCase());
 });
 
 async function loadHomePage() {
@@ -13,6 +14,7 @@ async function loadHomePage() {
 async function showHomePage() {
   document.getElementById("show-exam").innerHTML = "";
   document.getElementById("home-page").style.display = 'block';
+  document.getElementById("search-token").value = ""
 }
 
 async function loadExams() {
