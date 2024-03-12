@@ -9,18 +9,22 @@ async function loadExams() {
 
   data.forEach(function(exam) {
       const tr = document.createElement('tr');
-
+      tr.classList.add("table-row");
+      
       td_tag = document.createElement('td');
+      td_tag.classList.add("table-item");
       td_text = document.createTextNode(exam['patient']['name']);
       td_tag.appendChild(td_text);
       tr.appendChild(td_tag);
 
       td_tag = document.createElement('td');
+      td_tag.classList.add("table-item");
       td_text = document.createTextNode(exam['doctor']['name']);
       td_tag.appendChild(td_text);
       tr.appendChild(td_tag);
 
       td_tag = document.createElement('td');
+      td_tag.classList.add("table-item");
       a_tag = document.createElement('a');
       a_text = document.createTextNode(exam['token']);
       a_tag.appendChild(a_text);
@@ -29,6 +33,7 @@ async function loadExams() {
       tr.appendChild(td_tag);
   
       td_tag = document.createElement('td');
+      td_tag.classList.add("table-item");
       td_text = document.createTextNode(exam['date']);
       td_tag.appendChild(td_text);
       tr.appendChild(td_tag);

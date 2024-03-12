@@ -4,10 +4,12 @@
   box-sizing: border-box;
 }
 
+
 .content {
   margin-inline: 23rem;
   padding: 0.5rem 1rem;
 }
+
 
 .navbar {
   background-color: #3A56DD;
@@ -70,4 +72,34 @@
 .search-form button:hover {
   background-color: rgb(185, 255, 185);
   color: black;
+}
+
+
+.page-title {
+  text-align: center;
+}
+
+
+.exam-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-row {
+  display: flex;
+  border-bottom: 1px solid #ccc;
+}
+
+.table-header {
+  font-weight: bold;
+}
+
+.table-item {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+}
+
+tr:nth-of-type(odd) {
+  background-color: #f2f2f2;
 }
