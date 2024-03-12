@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'csv'
 require_relative '../data_importer'
 require_relative '../server'
+require 'require_all'
+require_all 'models'
 
 
 describe 'Server' do
@@ -19,9 +21,7 @@ describe 'Server' do
 
   it '/tests' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
-    allow(CSV).to receive(:read).and_return(test_data)
-
-    DataImporter.import_from_csv
+    DataImporter.import_from_csv(test_data)
     
     get '/tests'
 
@@ -122,6 +122,20 @@ describe 'Server' do
       get '/tests/Z9OFOQ'
 
       expect(last_response.body).to be {}
+    end
+  end
+
+  context '/import' do
+    it 'success' do
+      data = File.read('spec/support/test_data.csv') 
+
+      post '/import', data, { 'CONTENT_TYPE' => 'Content-Type: text/csv' }
+
+      expect(last_response.status).to eq 200
+      expect(Patient.all(@conn).count).to eq 3
+      expect(Exam.all(@conn).count).to eq 3
+      expect(Doctor.all(@conn).count).to eq 3
+      expect(Test.all(@conn).count).to eq 3
     end
   end
 end

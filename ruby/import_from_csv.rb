@@ -1,3 +1,4 @@
 require_relative 'data_importer'
 
-DataImporter.import_from_csv
+csv = CSV.read('data.csv', col_sep:';') 
+DataImporter.import_from_csv(csv)

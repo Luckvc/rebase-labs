@@ -1,12 +1,14 @@
 require 'sinatra'
+require 'csv'
 require 'pg'
 require 'byebug'
 require 'require_all'
 require_all 'models'
+require_relative 'db_connecter'
 
-dbname = ENV['RACK_ENV'] || 'development'
-conn = PG.connect( dbname: dbname, host: 'postgres', user: 'admin', password: '123456' )
-puts "connected to #{dbname} database" if conn
+
+conn = DBConnecter.connect
+puts "connected to #{conn.db} database" if conn
 
 get '/tests' do
   content_type 'application/json'
@@ -28,4 +30,12 @@ get '/tests/:token' do
 
   exam_hash = exam.hash_exam(conn)
   exam_hash.to_json
+end
+
+post '/import' do
+  response.headers['Access-Control-Allow-Origin'] = '*'
+  csv = CSV.parse(request.body.string, col_sep:';', headers: false)
+  DataImporter.import_from_csv(csv)
+
+  200
 end
