@@ -80,7 +80,7 @@ describe 'Server' do
     expect(json[2]['tests'][0]['result']).to eq '48'
   end
 
-  context '/search' do
+  context '/tests/:token' do
     it 'success' do
       patient = Patient.create({cpf: '12345678912', name: 'Lucas Vasques', email: 'lucas@email.com',
                                 birthdate: Date.new(2000, 11, 8), address: 'Rua Silva e Silva', city: 'São Paulo',
@@ -92,7 +92,7 @@ describe 'Server' do
       exam.create_test({type: 'hemácias', limits: '45-52', result: '97'}, @conn)
       exam.create_test({type: 'leucócitos', limits: '9-61', result: '89'}, @conn)
 
-      get '/search', params = { token: 'IG4O21'}
+      get '/tests/IG4O21'
 
       expect(last_response.content_type).to eq 'application/json'
 
@@ -119,9 +119,9 @@ describe 'Server' do
     end
     
     it 'not found' do
-      get '/search', params = { token: 'Z95COQ'}
+      get '/tests/Z9OFOQ'
 
-      expect(last_response.body).to eq {}
+      expect(last_response.body).to be {}
     end
   end
 end

@@ -20,7 +20,7 @@ get '/hello' do
   'Hello world!'
 end
 
-get '/search' do
+get '/tests/:token' do
   content_type 'application/json'
   response.headers['Access-Control-Allow-Origin'] = '*'
   exam = Exam.find_by('token', params['token'], conn)
