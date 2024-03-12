@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", loadHomePage ());
 document.getElementById("all_exams_link").addEventListener("click", function() { showHomePage() });
 document.getElementById("search-form").addEventListener("submit", (event) => { 
   event.preventDefault();
-  console.log(document.querySelector("input"));
+  showExam(document.getElementById("search-token").value);
 });
 
 async function loadHomePage() {
@@ -62,7 +62,21 @@ function displayExams(exams) {
 
 async function showExam(token) {
   exam = await fetchExam(token);
+  document.getElementById("show-exam").innerHTML = "";
+  document.getElementById("home-page").style.display = 'none';
+
+  if (Object.keys(exam).length === 0) return tokenNotFound();
+  
   loadExam(exam);
+}
+
+function tokenNotFound() {
+  const h2 = document.createElement('h2');
+  const notFound = document.createTextNode('Nenhum resultado encontrado.');
+  h2.classList.add("not-found");
+  h2.appendChild(notFound);
+  const showExamDiv = document.getElementById("show-exam");
+  showExamDiv.appendChild(h2);
 }
 
 async function fetchExam(token) {

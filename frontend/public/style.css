@@ -126,3 +126,15 @@ ul {
   justify-content: space-between;
   margin: 1rem;
 }
+
+.not-found {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+button.token-btn {
+  all: unset;
+  text-decoration: underline;
+  color: blue;
+  cursor: pointer;
+}
