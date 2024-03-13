@@ -131,3 +131,24 @@ Expected response status 404:
 ```json
 {}
 ```
+
+- `/import`
+
+Endpoint: `POST`
+Accepted file extention: `.csv`
+Request content-type: `text/csv`
+
+Expected response status 200: 
+```json
+["Dados Importados"]
+```
+
+Expected response status 415: 
+```json
+["Arquivo não suportado"]
+```
+
+Expected response status 422: 
+```json
+["Dados não compatíveis"]
+```

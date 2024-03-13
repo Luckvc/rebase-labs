@@ -34,16 +34,18 @@ end
 
 post '/import' do
   response.headers['Access-Control-Allow-Origin'] = '*'
+  content_type 'application/json'
   unless File.extname(params['file']['tempfile']) == '.csv'
-    response.body = 'arquivo não suportado'
-    return 400 
+    response.body = 'Arquivo não suportado'
+    return 415
   end
-
+  
   csv = CSV.read(params['file']['tempfile'], col_sep:';')
   DataImporter.import_from_csv(csv)
-
+  
+  response.body = 'Dados Importados'
   200
 rescue PG::Error
-  response.body = 'dados não compatíveis'
-  return 400 
+  response.body = 'Dados não compatíveis'
+  return 422 
 end

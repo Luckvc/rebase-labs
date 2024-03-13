@@ -139,15 +139,16 @@ describe 'Server' do
     it 'not a supported file' do
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
 
-      expect(last_response.status).to eq 400
-      expect(last_response.body).to include 'arquivo não suportado'
+      byebug
+      expect(last_response.status).to eq 415
+      expect(last_response.body).to include 'Arquivo não suportado'
     end
     
     it 'a csv with the wrong data' do
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/wrong_test_data.csv", "text/csv")
 
-      expect(last_response.status).to eq 400
-      expect(last_response.body).to include 'dados não compatíveis'
+      expect(last_response.status).to eq 422
+      expect(last_response.body).to include 'Dados não compatíveis'
     end
   end
 end
