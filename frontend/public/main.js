@@ -1,18 +1,22 @@
 document.addEventListener("DOMContentLoaded", loadHomePage ());
 document.getElementById("all_exams_link").addEventListener("click", function() { showHomePage() });
+document.getElementById("import_data_link").addEventListener("click", function() { showImportDataPage() });
 document.getElementById("search-form").addEventListener("submit", (event) => { 
   event.preventDefault();
 
   showExam(document.getElementById("search-token").value.toUpperCase());
 });
 
+
 async function loadHomePage() {
+  document.getElementById("import-data-page").style.display = 'none';
   exams = await loadExams();
   displayExams(exams);
 }
 
 async function showHomePage() {
   document.getElementById("show-exam").innerHTML = "";
+  document.getElementById("import-data-page").style.display = 'none';
   document.getElementById("home-page").style.display = 'block';
   document.getElementById("search-token").value = ""
 }
@@ -59,14 +63,12 @@ function displayExams(exams) {
     });
 }
 
-async function showExam(token) {
-  exam = await fetchExam(token);
-  document.getElementById("show-exam").innerHTML = "";
-  document.getElementById("home-page").style.display = 'none';
 
-  if (Object.keys(exam).length === 0) return tokenNotFound();
+
+async function fetchExam(token) {
+  response = await fetch('http://localhost:9292/tests/' + token);
   
-  loadExam(exam);
+  return await response.json();
 }
 
 function tokenNotFound() {
@@ -78,10 +80,15 @@ function tokenNotFound() {
   showExamDiv.appendChild(h2);
 }
 
-async function fetchExam(token) {
-  response = await fetch('http://localhost:9292/tests/' + token);
+async function showExam(token) {
+  exam = await fetchExam(token);
+  document.getElementById("show-exam").innerHTML = "";
+  document.getElementById("home-page").style.display = 'none';
+  document.getElementById("import-data-page").style.display = 'none';
+
+  if (Object.keys(exam).length === 0) return tokenNotFound();
   
-  return await response.json();
+  loadExam(exam);
 }
 
 function loadExam(exam) {
@@ -137,4 +144,12 @@ function buildTest(test) {
     tr.appendChild(td_tag);
 
     return tr;
+}
+
+
+
+function showImportDataPage() {
+  document.getElementById("show-exam").innerHTML = "";
+  document.getElementById("home-page").style.display = 'none';
+  document.getElementById("import-data-page").style.display = 'block';
 }
