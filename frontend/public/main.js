@@ -6,6 +6,12 @@ document.getElementById("search-form").addEventListener("submit", (event) => {
 
   showExam(document.getElementById("search-token").value.toUpperCase());
 });
+document.getElementById("import-form").addEventListener("submit", (event) => { 
+  event.preventDefault();
+  document.getElementById("import-message").innerHTML = "";
+
+  uploadFile(document.getElementById("import-file").files[0]);
+});
 
 
 async function loadHomePage() {
@@ -123,27 +129,27 @@ function loadExam(exam) {
 
 function buildTest(test) {
   const tr = document.createElement('tr');
-    tr.classList.add("table-row");
+  tr.classList.add("table-row");
 
-    td_tag = document.createElement('td');
-    td_tag.classList.add("table-item");
-    td_text = document.createTextNode(test['type']);
-    td_tag.appendChild(td_text);
-    tr.appendChild(td_tag);
+  td_tag = document.createElement('td');
+  td_tag.classList.add("table-item");
+  td_text = document.createTextNode(test['type']);
+  td_tag.appendChild(td_text);
+  tr.appendChild(td_tag);
 
-    td_tag = document.createElement('td');
-    td_tag.classList.add("table-item");
-    td_text = document.createTextNode(test['limits']);
-    td_tag.appendChild(td_text);
-    tr.appendChild(td_tag);
+  td_tag = document.createElement('td');
+  td_tag.classList.add("table-item");
+  td_text = document.createTextNode(test['limits']);
+  td_tag.appendChild(td_text);
+  tr.appendChild(td_tag);
 
-    td_tag = document.createElement('td');
-    td_tag.classList.add("table-item");
-    td_text = document.createTextNode(test['result']);
-    td_tag.appendChild(td_text);
-    tr.appendChild(td_tag);
+  td_tag = document.createElement('td');
+  td_tag.classList.add("table-item");
+  td_text = document.createTextNode(test['result']);
+  td_tag.appendChild(td_text);
+  tr.appendChild(td_tag);
 
-    return tr;
+  return tr;
 }
 
 
@@ -152,4 +158,38 @@ function showImportDataPage() {
   document.getElementById("show-exam").innerHTML = "";
   document.getElementById("home-page").style.display = 'none';
   document.getElementById("import-data-page").style.display = 'block';
+}
+
+async function uploadFile(file) {
+  if (file.type != 'text/csv') { return invalidFile(file)}
+
+  const formData = new FormData();
+  formData.append('file', file);
+  try {
+    const response = await fetch("http://localhost:9292/import", {
+      method: "POST",
+      body: formData,
+    });
+
+    const result = await response.json();
+    importMessage(result);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+}
+
+function importMessage(message) {
+  const p_tag = document.createElement('p');
+  p_tag.classList.add("import-text");
+  p_text = document.createTextNode(message);
+  p_tag.appendChild(p_text);
+  document.getElementById("import-message").appendChild(p_tag);
+}
+
+function invalidFile(file) {
+  const p_tag = document.createElement('p');
+  p_tag.classList.add("import-text");
+  p_text = document.createTextNode("Tipo de arquivo inválido");
+  p_tag.appendChild(p_text);
+  document.getElementById("import-message").appendChild(p_tag);
 }

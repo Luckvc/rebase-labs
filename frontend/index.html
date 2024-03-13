@@ -43,8 +43,10 @@
     <div id="import-data-page">
       <h1 class="page-title">Importar Dados</h1>
       <form id="import-form" enctype="multipart/form-data">
-        <input type="file" name="csvFile" accept=".csv">
-        <button type="submit">Importar</button>
+        <p class="suported-files">Somente arquivos CSV são aceitos</p>
+        <input type="file" name="csvFile" accept=".csv" id="import-file">
+        <div id="import-message"> </div>
+        <button type="submit" class="import-btn">Importar</button>
       </form>
     </div>
   </div>

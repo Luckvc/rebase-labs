@@ -169,7 +169,7 @@ input[type="file"] {
   background-color: #f9f9f9;
 }
 
-button[type="submit"] {
+.import-btn[type="submit"] {
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
@@ -179,6 +179,15 @@ button[type="submit"] {
   transition: background-color 0.3s;
 }
 
-button[type="submit"]:hover {
+.import-btn:hover {
   background-color: #0056b3;
+}
+
+.import-text {
+  margin: 0.5rem;
+} 
+
+.suported-files {
+  font-size: small;
+  font-weight: bold;
 }
