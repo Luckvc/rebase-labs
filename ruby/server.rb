@@ -5,6 +5,7 @@ require 'byebug'
 require 'require_all'
 require_all 'models'
 require_relative 'db_connecter'
+require_relative 'data_importer'
 
 
 conn = DBConnecter.connect
@@ -39,13 +40,13 @@ post '/import' do
     response.body = 'Arquivo não suportado'
     return 415
   end
-  
+
   csv = CSV.read(params['file']['tempfile'], col_sep:';')
   DataImporter.import_from_csv(csv)
-  
-  response.body = 'Dados Importados'
+ 
+  response.body = 'Dados Importados'.to_json
   200
 rescue PG::Error
-  response.body = 'Dados não compatíveis'
+  response.body = 'Dados Incompatíveis'.to_json
   return 422 
 end

@@ -36,7 +36,7 @@
   align-items: center;
 }
 
-.all_exams {
+.nav-link {
   color: white;
   border: none;
   padding: 1rem 20px;
@@ -44,7 +44,7 @@
   cursor: pointer;
 }
 
-.all_exams:hover {
+.nav-link:hover {
   color: white;
   background-color: rgb(25, 26, 105);
   cursor: pointer;
@@ -83,6 +83,7 @@
 
 
 .page-title {
+  margin-block: 2rem;
   text-align: center;
 }
 
@@ -149,4 +150,44 @@ button.token-btn {
 .test-title {
   margin-left: 1rem;
   margin-top: 2rem;
+}
+
+
+#import-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+input[type="file"] {
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 300px;
+  background-color: #f9f9f9;
+}
+
+.import-btn[type="submit"] {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.import-btn:hover {
+  background-color: #0056b3;
+}
+
+.import-text {
+  margin: 0.5rem;
+} 
+
+.suported-files {
+  font-size: small;
+  font-weight: bold;
 }

@@ -139,7 +139,6 @@ describe 'Server' do
     it 'not a supported file' do
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
 
-      byebug
       expect(last_response.status).to eq 415
       expect(last_response.body).to include 'Arquivo não suportado'
     end
