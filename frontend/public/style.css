@@ -5,6 +5,10 @@
   font-family: 'Roboto', sans-serif;
 }
 
+body {
+  background-color: rgb(255, 255, 248);
+}
+
 .content {
   margin-inline: auto;
   width: 55vw;
@@ -90,6 +94,7 @@
 .table {
   width: 100%;
   border-collapse: collapse;
+  background-color: white;
 }
 
 .table-row {
@@ -120,11 +125,7 @@
 }
 
 tr:nth-of-type(even) {
-  background-color: #f2f2f2;
-}
-
-ul {
-  list-style-type: none;
+  background-color: #f6f8ff;
 }
 
 .patient-doctor-info {
@@ -195,4 +196,33 @@ input[type="file"] {
 .suported-files {
   font-size: small;
   font-weight: bold;
+}
+
+#patient, #doctor {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 80%;
+  padding: 20px;
+}
+
+.info-header {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+li {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 5px;
+}
+
+#patient + #doctor {
+  margin-left: 20px;
 }
