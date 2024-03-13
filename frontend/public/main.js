@@ -60,7 +60,7 @@ function displayExams(exams) {
   
       td_tag = document.createElement('td');
       td_tag.classList.add("table-item");
-      td_text = document.createTextNode(exam['date']);
+      td_text = document.createTextNode(new Date(exam['date']).toLocaleDateString("pt-br"));
       td_tag.appendChild(td_text);
       tr.appendChild(td_tag);
 
@@ -106,12 +106,12 @@ function loadExam(exam) {
   document.getElementById("home-page").style.display = 'none';
 
   examPage.getElementById("token").appendChild(document.createTextNode(exam['token']));
-  examPage.getElementById("date").appendChild(document.createTextNode(exam['date']));
+  examPage.getElementById("date").appendChild(document.createTextNode(new Date(exam['date']).toLocaleDateString("pt-br")));
 
   examPage.getElementById("patient_name").appendChild(document.createTextNode(exam['patient']['name']));
   examPage.getElementById("patient_cpf").appendChild(document.createTextNode(exam['patient']['cpf']));
   examPage.getElementById("patient_email").appendChild(document.createTextNode(exam['patient']['email']));
-  examPage.getElementById("patient_birthdate").appendChild(document.createTextNode(exam['patient']['birthdate']));
+  examPage.getElementById("patient_birthdate").appendChild(document.createTextNode(new Date(exam['patient']['birthdate']).toLocaleDateString("pt-br")));
   examPage.getElementById("patient_address").appendChild(document.createTextNode(exam['patient']['address']));
 
   examPage.getElementById("doctor_name").appendChild(document.createTextNode(exam['doctor']['name']));
