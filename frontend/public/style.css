@@ -2,8 +2,8 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Roboto', sans-serif;
 }
-
 
 .content {
   margin-inline: auto;
@@ -87,7 +87,6 @@
   text-align: center;
 }
 
-
 .table {
   width: 100%;
   border-collapse: collapse;
@@ -105,8 +104,13 @@
 
 .table-header {
   font-weight: bold;
+  font-size: large;
+  background-color: #3A56DD;
+  color: white;
   display: flex;
   border-bottom: 1px solid #ccc;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
 }
 
 .table-item {
@@ -115,7 +119,7 @@
   text-align: center;
 }
 
-tr:nth-of-type(odd) {
+tr:nth-of-type(even) {
   background-color: #f2f2f2;
 }
 
@@ -150,6 +154,7 @@ button.token-btn {
 .test-title {
   margin-left: 1rem;
   margin-top: 2rem;
+  margin-bottom: 1rem;
 }
 
 
