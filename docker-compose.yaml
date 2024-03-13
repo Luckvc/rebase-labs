@@ -12,7 +12,7 @@ services:
                         test: ["CMD-SHELL", "pg_isready -U admin"]
                         interval: 1s
                         retries: 5
-        backend:
+        backend: &app
                 image: ruby
                 volumes:
                         - 'Rubygems:/usr/local/bundle'
@@ -24,6 +24,14 @@ services:
                 ports:
                         - "9292:9292"
                 command: bash -c "bundle install && ruby server.rb puma -o 0.0.0.0 -p 9292"
+                environment:
+                        - REDIS_URL=redis://redis:6379/0
+        sidekiq:
+                <<: *app
+                ports: []
+                command: bash -c "bundle install && sidekiq -r ./jobs/import_job.rb"
+                depends_on:
+                        - redis
         frontend:
                 image: ruby
                 volumes:
@@ -35,6 +43,8 @@ services:
                 ports:
                         - "3000:3000"
                 command: bash -c "bundle install && ruby server.rb puma -o 0.0.0.0 -p 3000"
+        redis:
+                image: redis
 
 volumes:
         Rubygems:

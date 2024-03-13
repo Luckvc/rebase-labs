@@ -4,6 +4,7 @@ require 'pg'
 require 'byebug'
 require 'require_all'
 require_all 'models'
+require_all 'jobs'
 require_relative 'db_connecter'
 require_relative 'data_importer'
 
@@ -42,11 +43,8 @@ post '/import' do
   end
 
   csv = CSV.read(params['file']['tempfile'], col_sep:';')
-  DataImporter.import_from_csv(csv)
+  ImportJob.perform_async(csv)
  
-  response.body = 'Dados Importados'.to_json
+  response.body = 'Sua requisição está sendo processada'.to_json
   200
-rescue PG::Error
-  response.body = 'Dados Incompatíveis'.to_json
-  return 422 
 end
