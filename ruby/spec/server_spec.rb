@@ -2,6 +2,8 @@ require 'spec_helper'
 require 'csv'
 require_relative '../data_importer'
 require_relative '../server'
+require 'require_all'
+require_all 'models'
 
 
 describe 'Server' do
@@ -19,9 +21,7 @@ describe 'Server' do
 
   it '/tests' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
-    allow(CSV).to receive(:read).and_return(test_data)
-
-    DataImporter.import_from_csv
+    DataImporter.import_from_csv(test_data)
     
     get '/tests'
 
@@ -122,6 +122,33 @@ describe 'Server' do
       get '/tests/Z9OFOQ'
 
       expect(last_response.body).to be {}
+    end
+  end
+
+  context '/import' do
+    it 'success' do
+      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
+
+      expect(last_response.status).to eq 200
+      expect(Patient.all(@conn).count).to eq 3
+      expect(Exam.all(@conn).count).to eq 3
+      expect(Doctor.all(@conn).count).to eq 3
+      expect(Test.all(@conn).count).to eq 3
+    end
+
+    it 'not a supported file' do
+      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
+
+      byebug
+      expect(last_response.status).to eq 415
+      expect(last_response.body).to include 'Arquivo não suportado'
+    end
+    
+    it 'a csv with the wrong data' do
+      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/wrong_test_data.csv", "text/csv")
+
+      expect(last_response.status).to eq 422
+      expect(last_response.body).to include 'Dados não compatíveis'
     end
   end
 end

@@ -6,8 +6,7 @@ require_relative '../server'
 describe 'Import data from csv' do
   it 'and divide it into classes' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
-    allow(CSV).to receive(:read).and_return(test_data)
-    DataImporter.import_from_csv
+    DataImporter.import_from_csv(test_data)
 
     expect(Patient.all(@conn).count).to eq 3
     expect(Exam.all(@conn).count).to eq 3

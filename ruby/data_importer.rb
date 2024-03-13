@@ -5,9 +5,9 @@ require_all 'models'
 require_relative 'db_connecter'
 
 class DataImporter
-  def self.import_from_csv
+  def self.import_from_csv(csv)
     @conn = DBConnecter.connect
-    rows = readRows
+    rows = readRows(csv)
 
     puts 'importing data...' unless ENV['RACK_ENV'] == 'test'
     populate_db(rows)
@@ -18,16 +18,15 @@ class DataImporter
 
   private
 
-  def self.readRows
-    rows = CSV.read("data.csv", col_sep: ';')
-    rows.shift
-    rows.map do |row|
+  def self.readRows(csv)
+    csv.shift
+    csv.map do |row|
       row.each_with_object({}).with_index do |(cell, acc), idx|
         acc[idx] = cell
       end
     end
 
-    rows
+    csv
   end
 
   def self.populate_db(rows)
