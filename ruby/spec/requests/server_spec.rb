@@ -13,10 +13,10 @@ describe 'Server' do
     Sinatra::Application
   end
 
-  it '/hello' do
-    get '/hello'
+  it '/ping' do
+    get '/ping'
 
-    expect(last_response.body).to include 'Hello world!'
+    expect(last_response.body).to include 'Pong!'
   end
 
   it '/tests' do

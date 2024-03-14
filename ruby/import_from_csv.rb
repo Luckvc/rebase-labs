@@ -1,4 +1,4 @@
-require_relative 'data_importer_service'
+require_relative 'services/data_importer_service'
 
 begin
   csv = CSV.read('data.csv', col_sep:';') 

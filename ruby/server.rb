@@ -20,8 +20,8 @@ get '/tests' do
   exams.to_json
 end
 
-get '/hello' do
-  'Hello world!'
+get '/ping' do
+  "Pong!\n"
 end
 
 get '/tests/:token' do
