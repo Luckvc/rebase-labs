@@ -5,11 +5,11 @@ require 'byebug'
 require 'require_all'
 require_all 'models'
 require_all 'jobs'
-require_relative 'db_connecter'
-require_relative 'data_importer'
+require_relative 'services/db_connecter_service'
+require_relative 'services/data_importer_service'
 
 
-conn = DBConnecter.connect
+conn = DBConnecterService.connect
 puts "connected to #{conn.db} database" if conn
 
 get '/tests' do

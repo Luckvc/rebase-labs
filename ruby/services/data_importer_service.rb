@@ -2,11 +2,11 @@ require 'csv'
 require 'byebug'
 require 'require_all'
 require_all 'models'
-require_relative 'db_connecter'
+require_relative 'db_connecter_service'
 
-class DataImporter
+class DataImporterService
   def self.import_from_csv(csv)
-    @conn = DBConnecter.connect
+    @conn = DBConnecterService.connect
     rows = readRows(csv)
 
     puts 'importing data...' unless ENV['RACK_ENV'] == 'test'

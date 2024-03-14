@@ -2,7 +2,7 @@ services:
         postgres:
                 image: postgres
                 volumes:
-                        - './dataset/init.sql:/docker-entrypoint-initdb.d/init.sql'
+                        - './config/init.sql:/docker-entrypoint-initdb.d/init.sql'
                 environment:
                         POSTGRES_PASSWORD: 123456
                         POSTGRES_USER: admin

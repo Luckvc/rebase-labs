@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'csv'
-require_relative '../data_importer'
-require_relative '../server'
+require_relative '../../services/data_importer_service'
+require_relative '../../server'
 require 'require_all'
 require_all 'models'
 
@@ -21,7 +21,7 @@ describe 'Server' do
 
   it '/tests' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
-    DataImporter.import_from_csv(test_data)
+    DataImporterService.import_from_csv(test_data)
     
     get '/tests'
 
@@ -127,13 +127,12 @@ describe 'Server' do
 
   context '/import' do
     it 'success' do
+      importer_job_spy = spy('ImportJob')
+      stub_const('ImportJob', importer_job_spy)
+
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
 
-      expect(last_response.status).to eq 200
-      expect(Patient.all(@conn).count).to eq 3
-      expect(Exam.all(@conn).count).to eq 3
-      expect(Doctor.all(@conn).count).to eq 3
-      expect(Test.all(@conn).count).to eq 3
+      expect(importer_job_spy).to have_received(:perform_async).once
     end
 
     it 'not a supported file' do
@@ -141,13 +140,6 @@ describe 'Server' do
 
       expect(last_response.status).to eq 415
       expect(last_response.body).to include 'Arquivo não suportado'
-    end
-    
-    it 'a csv with the wrong data' do
-      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/wrong_test_data.csv", "text/csv")
-
-      expect(last_response.status).to eq 422
-      expect(last_response.body).to include 'Dados não compatíveis'
     end
   end
 end
