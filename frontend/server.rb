@@ -32,8 +32,7 @@ post '/import' do
 
   parameters = { file: Faraday::UploadIO.new(params['file']['tempfile'], 'text/csv') }
 
-  faraday_response = connection.post('/import', parameters)
+  response = connection.post('/import', parameters)
 
-  response.status = faraday_response.status
-  faraday_response.body
+  response.body
 end

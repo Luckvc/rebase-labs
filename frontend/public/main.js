@@ -40,29 +40,29 @@ function displayExams(exams) {
       tr.classList.add("exam-table-row");
       tr.addEventListener("click", function() { showExam(exam['token']) });
       
-      td_tag = document.createElement('td');
-      td_tag.classList.add("table-item");
-      td_text = document.createTextNode(exam['patient']['name']);
-      td_tag.appendChild(td_text);
-      tr.appendChild(td_tag);
+      tdTag = document.createElement('td');
+      tdTag.classList.add("table-item");
+      tdText = document.createTextNode(exam['patient']['name']);
+      tdTag.appendChild(tdText);
+      tr.appendChild(tdTag);
 
-      td_tag = document.createElement('td');
-      td_tag.classList.add("table-item");
-      td_text = document.createTextNode(exam['doctor']['name']);
-      td_tag.appendChild(td_text);
-      tr.appendChild(td_tag);
+      tdTag = document.createElement('td');
+      tdTag.classList.add("table-item");
+      tdText = document.createTextNode(exam['doctor']['name']);
+      tdTag.appendChild(tdText);
+      tr.appendChild(tdTag);
 
-      td_tag = document.createElement('td');
-      td_tag.classList.add("table-item");
-      td_text = document.createTextNode(exam['token']);
-      td_tag.appendChild(td_text);
-      tr.appendChild(td_tag);
+      tdTag = document.createElement('td');
+      tdTag.classList.add("table-item");
+      tdText = document.createTextNode(exam['token']);
+      tdTag.appendChild(tdText);
+      tr.appendChild(tdTag);
   
-      td_tag = document.createElement('td');
-      td_tag.classList.add("table-item");
-      td_text = document.createTextNode(exam['date']);
-      td_tag.appendChild(td_text);
-      tr.appendChild(td_tag);
+      tdTag = document.createElement('td');
+      tdTag.classList.add("table-item");
+      tdText = document.createTextNode(exam['date']);
+      tdTag.appendChild(tdText);
+      tr.appendChild(tdTag);
 
       const element = document.getElementById('exam-table-body')
       element.appendChild(tr)
@@ -131,23 +131,23 @@ function buildTest(test) {
   const tr = document.createElement('tr');
   tr.classList.add("table-row");
 
-  td_tag = document.createElement('td');
-  td_tag.classList.add("table-item");
-  td_text = document.createTextNode(test['type']);
-  td_tag.appendChild(td_text);
-  tr.appendChild(td_tag);
+  tdTag = document.createElement('td');
+  tdTag.classList.add("table-item");
+  tdText = document.createTextNode(test['type']);
+  tdTag.appendChild(tdText);
+  tr.appendChild(tdTag);
 
-  td_tag = document.createElement('td');
-  td_tag.classList.add("table-item");
-  td_text = document.createTextNode(test['limits']);
-  td_tag.appendChild(td_text);
-  tr.appendChild(td_tag);
+  tdTag = document.createElement('td');
+  tdTag.classList.add("table-item");
+  tdText = document.createTextNode(test['limits']);
+  tdTag.appendChild(tdText);
+  tr.appendChild(tdTag);
 
-  td_tag = document.createElement('td');
-  td_tag.classList.add("table-item");
-  td_text = document.createTextNode(test['result']);
-  td_tag.appendChild(td_text);
-  tr.appendChild(td_tag);
+  tdTag = document.createElement('td');
+  tdTag.classList.add("table-item");
+  tdText = document.createTextNode(test['result']);
+  tdTag.appendChild(tdText);
+  tr.appendChild(tdTag);
 
   return tr;
 }
@@ -163,7 +163,7 @@ function showImportDataPage() {
 }
 
 async function uploadFile(file) {
-  if (file.type != 'text/csv') { return invalidFile(file)}
+  if (file.type != 'text/csv') { return flashMessage('Arquivo inválido', 'error')}
 
   const formData = new FormData();
   formData.append('file', file);
@@ -174,7 +174,6 @@ async function uploadFile(file) {
     });
 
     const result = await response.json();
-    if (response.status == 200) { return importSuccess() };
 
     importMessage(result);
   } catch (error) {
@@ -183,23 +182,34 @@ async function uploadFile(file) {
 }
 
 function importMessage(message) {
-  const p_tag = document.createElement('p');
-  p_tag.classList.add("import-text");
-  p_text = document.createTextNode(message);
-  p_tag.appendChild(p_text);
-  document.getElementById("import-message").appendChild(p_tag);
-}
-
-function importSuccess() {
   document.getElementById("import-file").value = "";
+  flashMessage('Arquivo em processamento.', 'processing')
 
   showHomePage();
 }
 
-function invalidFile(file) {
-  const p_tag = document.createElement('p');
-  p_tag.classList.add("import-text");
-  p_text = document.createTextNode("Tipo de arquivo inválido");
-  p_tag.appendChild(p_text);
-  document.getElementById("import-message").appendChild(p_tag);
+function flashMessage(message, status) {
+  const flashMessage = document.getElementById('flash-message');
+  const flashMessageText = document.getElementById('flash-message-text');
+  flashMessageText.innerHTML = "";
+  
+  flashMessageText.appendChild(document.createTextNode(message));
+
+  flashMessage.classList.add(status);
+  
+  flashMessage.style.display = 'block';
+  flashMessage.classList.add('show');
+  
+  setTimeout(() => {
+    flashMessage.classList.remove('show');
+    flashMessage.classList.add('hide');
+
+    
+    setTimeout(() => {
+      flashMessage.classList.remove('hide');
+      flashMessage.style.display = 'none';
+      flashMessage.classList.remove(status);
+      flashMessageText.innerHTML = "";
+    }, 300);
+  }, 5000);
 }
