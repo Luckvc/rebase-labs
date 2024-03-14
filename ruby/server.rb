@@ -36,7 +36,7 @@ end
 
 post '/import' do
   response.headers['Access-Control-Allow-Origin'] = '*'
-  content_type 'application/json'
+  content_type 'application/json; charset=utf-8'
   unless File.extname(params['file']['tempfile']) == '.csv'
     response.body = 'Arquivo não suportado'
     return 415

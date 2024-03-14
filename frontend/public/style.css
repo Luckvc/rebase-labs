@@ -226,3 +226,60 @@ li {
 #patient + #doctor {
   margin-left: 20px;
 }
+
+
+
+.flash-message {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 5px;
+  position: fixed;
+  right: 10%;
+  bottom: 10%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.flash-message.processing {
+  background-color: #007bff; 
+}
+
+.flash-message.success {
+  background-color: #4caf50; 
+}
+
+.flash-message.error {
+  background-color: #f44336;
+}
+
+.flash-message.show {
+  animation: slideIn 0.3s ease forwards;
+}
+
+.flash-message.hide {
+  animation: slideOut 0.3s ease forwards;
+}
+
+@keyframes slideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes slideOut {
+  0% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+}

@@ -1,0 +1,4 @@
+patient_cpf;patient_name;patient_email;patient_birthdate;patient_address;patient_city;patient_state;doctor_crm;doctor_crm_state;doctor_name;doctor_email;exam_token;exam_date;exam_type;exam_limits;exam_result
+048.973.170-88;Lucas Vasques;gerald.crona@ebert-quigley.com;2001-03-11;165 Rua Rafaela;Ituverava;Alagoas;B000BJ20J4;PI;Maria Luisa Baos;denna@wisozk.biz;IQCZ17;2021-08-05;hemácias;45-52;97
+019.338.696-82;Frederico Mozzato;leona@bahringer.net;1978-01-26;s/n Marginal Eloah Dantas;Serra Negra do Norte;Santa Catarina;B0002W2RBG;PE;Dr. Rafael;diann_klein@schinner.org;Z95COQ;2021-04-29;ácido úrico;15-61;52
+089.034.562-70;Paulo Henrique;herta_wehner@krajcik.name;1998-02-25;5334 Rodovia Thiago Bittencourt;Jequitibá;Paraná;B0002W2RBG;CE;Dr. Leandro;diann_klein@schinner.org;0B5XII;2021-07-15;ldl;45-54;48
