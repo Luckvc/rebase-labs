@@ -1,0 +1,31 @@
+{
+  "id": "304",
+  "token": "IQ1457",
+  "date": "2021-08-05",
+  "patient": {
+    "id": "54",
+    "cpf": "048.343.170-88",
+    "name": "Lucas Vasques",
+    "email": "gerald.crona@ebert-quigley.com",
+    "birthdate": "2001-03-11",
+    "address": "165 Rua Rafaela",
+    "city": "Ituverava",
+    "state": "Alagoas"
+  },
+  "doctor": {
+    "id": "14",
+    "crm": "B123BJ20J4",
+    "crm_state": "PI",
+    "name": "Maria Luisa Baos",
+    "email": "denna@wisozk.biz"
+  },
+  "tests": [
+    {
+      "id": "3904",
+      "type": "hemácias",
+      "limits": "45-52",
+      "result": "97",
+      "exam_id": "304"
+    }
+  ]
+}

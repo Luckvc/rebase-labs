@@ -28,7 +28,7 @@ async function showHomePage() {
 }
 
 async function loadExams() {
-  response = await fetch('http://localhost:9292/tests');
+  response = await fetch('/tests');
 
   return await response.json();
 }
@@ -72,7 +72,7 @@ function displayExams(exams) {
 
 
 async function fetchExam(token) {
-  response = await fetch('http://localhost:9292/tests/' + token);
+  response = await fetch('/tests/' + token);
   
   return await response.json();
 }
@@ -168,7 +168,7 @@ async function uploadFile(file) {
   const formData = new FormData();
   formData.append('file', file);
   try {
-    const response = await fetch("http://localhost:9292/import", {
+    const response = await fetch("/import", {
       method: "POST",
       body: formData,
     });
