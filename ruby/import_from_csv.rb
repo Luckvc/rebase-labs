@@ -1,8 +1,8 @@
-require_relative 'data_importer'
+require_relative 'data_importer_service'
 
 begin
   csv = CSV.read('data.csv', col_sep:';') 
-  DataImporter.import_from_csv(csv)
+  DataImporterService.import_from_csv(csv)
 rescue PG::Error
   puts 'Erro: Dados não compatíveis'
 end

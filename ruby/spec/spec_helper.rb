@@ -1,7 +1,9 @@
 require 'rack/test'
 require 'pg'
+require 'sidekiq'
 
 ENV['RACK_ENV'] = 'test'
+Sidekiq.logger.warn!
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
