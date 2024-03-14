@@ -1,6 +1,7 @@
 require 'rack/test'
 require 'pg'
 require 'sidekiq'
+require_relative '../services/db_connecter_service'
 
 ENV['RACK_ENV'] = 'test'
 Sidekiq.logger.warn!
@@ -19,7 +20,7 @@ RSpec.configure do |config|
   config.shared_context_metadata_behavior = :apply_to_host_groups
 
   config.before(:all) do
-    @conn = PG.connect(dbname: 'test', host: 'postgres', user: 'admin', password: '123456')
+    @conn = DBConnecterService.connect
     @conn.exec("TRUNCATE TABLE patients, doctors, exams, tests;")
   end
 
