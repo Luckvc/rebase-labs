@@ -111,6 +111,8 @@ describe 'Server' do
 
   context '/import' do
     it 'success' do
+      fake_response = double('Faraday::Response', body: single_exam_data.to_json)
+      allow(Faraday).to receive(:get).and_return(fake_response)
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
 
       expect(last_response.body).to include 'Sua requisição está sendo processada'

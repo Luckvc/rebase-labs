@@ -17,7 +17,8 @@ get '/tests' do
   response.headers['Access-Control-Allow-Origin'] = '*'
   exams = Exam.all(conn)
   exams = exams.map {|exam| exam.hash_exam(conn)}
-  exams.to_json
+  sorted_exams = exams.sort_by{ |exam| exam['date'] }.reverse
+  sorted_exams.to_json
 end
 
 get '/ping' do
