@@ -158,6 +158,8 @@ function showImportDataPage() {
   document.getElementById("show-exam").innerHTML = "";
   document.getElementById("home-page").style.display = 'none';
   document.getElementById("import-data-page").style.display = 'block';
+  document.getElementById("import-message").innerHTML = "";
+  document.getElementById("import-file").value = "";
 }
 
 async function uploadFile(file) {
@@ -172,6 +174,8 @@ async function uploadFile(file) {
     });
 
     const result = await response.json();
+    if (response.status == 200) { return importSuccess() };
+
     importMessage(result);
   } catch (error) {
     console.error("Error:", error);
@@ -184,6 +188,12 @@ function importMessage(message) {
   p_text = document.createTextNode(message);
   p_tag.appendChild(p_text);
   document.getElementById("import-message").appendChild(p_tag);
+}
+
+function importSuccess() {
+  document.getElementById("import-file").value = "";
+
+  showHomePage();
 }
 
 function invalidFile(file) {

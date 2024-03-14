@@ -56,13 +56,13 @@
   <template id="template">
     <div id="exam-page">
       <div class="header">
-        <h2 id="token">Exame </h2>
-        <h2 id="date">Data: </h2>
+        <h2 id="token"><small style="font-weight: lighter;">Exame:</small> </h2>
+        <h2 id="date"><small style="font-weight: lighter;">Data:</small> </h2>
       </div>
 
       <div class="patient-doctor-info">
         <div id="patient">
-          <h3>Paciente</h3>
+          <h3 class="info-header">Paciente</h3>
           <ul>  
             <li id="patient_name">Nome: </li>
             <li id="patient_cpf">Cpf: </li>
@@ -73,7 +73,7 @@
         </div>
         
         <div id="doctor">
-          <h3>Médico</h3>
+          <h3 class="info-header">Médico</h3>
           <ul>
             <li id="doctor_name">Nome: </li>
             <li id="doctor_crm">CRM: </li>
@@ -87,7 +87,7 @@
         <h2 class="test-title">Testes</h2>
         <table id="test-table" class="table">
           <thead class="table-head">
-            <tr class="table-row">
+            <tr class="table-header">
               <th class="table-item">Tipo de Exame</th>
               <th class="table-item">Referência</th>
               <th class="table-item">Resultado</th>
