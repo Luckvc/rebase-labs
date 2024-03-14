@@ -1,7 +1,7 @@
 require 'sinatra'
 require 'csv'
 require 'pg'
-require 'byebug'
+
 require 'require_all'
 require_all 'models'
 require_all 'jobs'

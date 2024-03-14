@@ -1,5 +1,5 @@
 require 'csv'
-require 'byebug'
+
 require 'require_all'
 require_all 'models'
 require_relative 'db_connecter_service'

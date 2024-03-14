@@ -1,7 +1,7 @@
 require 'spec_helper'
 require 'csv'
 require_relative '../../server'
-require 'byebug'
+
 
 
 describe 'Server' do
@@ -111,14 +111,22 @@ describe 'Server' do
 
   context '/import' do
     it 'success' do
-      fake_response = double('Faraday::Response', body: single_exam_data.to_json)
-      allow(Faraday).to receive(:get).and_return(fake_response)
+      fake_faraday = double('Faraday::Connection')
+      fake_response = double('Faraday::Response', body: "Sua requisição está sendo processada")
+      allow(Faraday).to receive(:new).and_return(fake_faraday)
+      allow(fake_faraday).to receive(:post).and_return(fake_response)
+
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
 
       expect(last_response.body).to include 'Sua requisição está sendo processada'
     end
 
     it 'not a supported file' do
+      fake_faraday = double('Faraday::Connection')
+      fake_response = double('Faraday::Response', body: "Arquivo não suportado", status: 415)
+      allow(Faraday).to receive(:new).and_return(fake_faraday)
+      allow(fake_faraday).to receive(:post).and_return(fake_response)
+
       post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
 
       expect(last_response.status).to eq 415

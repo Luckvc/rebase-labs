@@ -1,4 +1,4 @@
-require 'byebug'
+
 
 class Repository
   def self.all(conn)

@@ -1,5 +1,6 @@
-require 'rack/test'
+require 'byebug'
 require 'pg'
+require 'rack/test'
 require 'sidekiq'
 require_relative '../services/db_connecter_service'
 
