@@ -2,8 +2,6 @@ require 'spec_helper'
 require 'csv'
 require_relative '../../server'
 
-
-
 describe 'Server' do
   include Rack::Test::Methods
 
@@ -78,11 +76,11 @@ describe 'Server' do
       single_exam_data = JSON.load_file('spec/support/single_exam_data.json')
       fake_response = double('Faraday::Response', body: single_exam_data.to_json)
       allow(Faraday).to receive(:get).and_return(fake_response)
-  
+
       get '/tests'
-  
+
       expect(last_response.content_type).to eq 'application/json'
-  
+
       json = JSON.parse(last_response.body)
       expect(json['token']).to eq 'IQ1457'
       expect(json['date']).to eq '2021-08-05'
@@ -101,33 +99,33 @@ describe 'Server' do
       expect(json['tests'][0]['limits']).to eq '45-52'
       expect(json['tests'][0]['result']).to eq '97'
     end
-    
+
     it 'not found' do
       get '/tests/Z9OFOQ'
 
-      expect(last_response.body).to be {}
+      expect(last_response.body).to(be {})
     end
   end
 
   context '/import' do
     it 'success' do
       fake_faraday = double('Faraday::Connection')
-      fake_response = double('Faraday::Response', body: "Sua requisição está sendo processada")
+      fake_response = double('Faraday::Response', body: 'Sua requisição está sendo processada')
       allow(Faraday).to receive(:new).and_return(fake_faraday)
       allow(fake_faraday).to receive(:post).and_return(fake_response)
 
-      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
+      post '/import', 'file' => Rack::Test::UploadedFile.new('spec/support/test_data.csv', 'text/csv')
 
       expect(last_response.body).to include 'Sua requisição está sendo processada'
     end
 
     it 'not a supported file' do
       fake_faraday = double('Faraday::Connection')
-      fake_response = double('Faraday::Response', body: "Arquivo não suportado", status: 415)
+      fake_response = double('Faraday::Response', body: 'Arquivo não suportado', status: 415)
       allow(Faraday).to receive(:new).and_return(fake_faraday)
       allow(fake_faraday).to receive(:post).and_return(fake_response)
 
-      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
+      post '/import', 'file' => Rack::Test::UploadedFile.new('spec/support/image.png', 'text/csv')
 
       expect(last_response.status).to eq 415
       expect(last_response.body).to include 'Arquivo não suportado'

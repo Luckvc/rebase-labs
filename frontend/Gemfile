@@ -5,4 +5,5 @@ gem 'faraday-multipart'
 gem 'puma'
 gem 'rackup'
 gem 'rspec'
+gem 'rubocop', require: false
 gem 'sinatra'

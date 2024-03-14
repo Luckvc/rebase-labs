@@ -3,12 +3,10 @@ require 'pg'
 require 'faraday'
 require 'faraday/multipart'
 
-
 get '/' do
   content_type 'text/html'
   File.open('index.html')
 end
-
 
 get '/tests' do
   content_type 'application/json'

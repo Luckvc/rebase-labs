@@ -1,10 +1,11 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 require 'csv'
 require_relative '../../services/data_importer_service'
 require_relative '../../server'
 require 'require_all'
 require_all 'models'
-
 
 describe 'Server' do
   include Rack::Test::Methods
@@ -22,7 +23,7 @@ describe 'Server' do
   it '/tests' do
     test_data = CSV.read('spec/support/test_data.csv', col_sep: ';')
     DataImporterService.import_from_csv(test_data)
-    
+
     get '/tests'
 
     expect(last_response.content_type).to eq 'application/json'
@@ -82,15 +83,18 @@ describe 'Server' do
 
   context '/tests/:token' do
     it 'success' do
-      patient = Patient.create({cpf: '12345678912', name: 'Lucas Vasques', email: 'lucas@email.com',
-                                birthdate: Date.new(2000, 11, 8), address: 'Rua Silva e Silva', city: 'São Paulo',
-                                state:'SP'}, @conn)
-      doctor = Doctor.create({crm: '654321', crm_state: 'CE', name: 'Leonardo Silva', email: 'leo@email.com'}, @conn)
-      exam = Exam.create({token: 'IG4O21', date: Date.new(2024, 01, 12), patient_id: patient.id, doctor_id: doctor.id}, @conn)
-      Exam.create({token: 'PG248G', date: Date.new(2023, 11, 18), patient_id: patient.id, doctor_id: doctor.id}, @conn)
+      patient = Patient.create({ cpf: '12345678912', name: 'Lucas Vasques', email: 'lucas@email.com',
+                                 birthdate: Date.new(2000, 11, 8), address: 'Rua Silva e Silva', city: 'São Paulo',
+                                 state: 'SP' }, @conn)
+      doctor = Doctor.create({ crm: '654321', crm_state: 'CE', name: 'Leonardo Silva', email: 'leo@email.com' }, @conn)
+      exam = Exam.create({ token: 'IG4O21', date: Date.new(2024, 0o1, 12), patient_id: patient.id,
+                           doctor_id: doctor.id },
+                         @conn)
+      Exam.create({ token: 'PG248G', date: Date.new(2023, 11, 18), patient_id: patient.id, doctor_id: doctor.id },
+                  @conn)
 
-      exam.create_test({type: 'hemácias', limits: '45-52', result: '97'}, @conn)
-      exam.create_test({type: 'leucócitos', limits: '9-61', result: '89'}, @conn)
+      exam.create_test({ type: 'hemácias', limits: '45-52', result: '97' }, @conn)
+      exam.create_test({ type: 'leucócitos', limits: '9-61', result: '89' }, @conn)
 
       get '/tests/IG4O21'
 
@@ -117,11 +121,11 @@ describe 'Server' do
       expect(json['tests'][1]['limits']).to eq '9-61'
       expect(json['tests'][1]['result']).to eq '89'
     end
-    
+
     it 'not found' do
       get '/tests/Z9OFOQ'
 
-      expect(last_response.body).to be {}
+      expect(last_response.body).to(be {})
     end
   end
 
@@ -130,13 +134,13 @@ describe 'Server' do
       importer_job_spy = spy('ImportJob')
       stub_const('ImportJob', importer_job_spy)
 
-      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/test_data.csv", "text/csv")
+      post '/import', 'file' => Rack::Test::UploadedFile.new('spec/support/test_data.csv', 'text/csv')
 
       expect(importer_job_spy).to have_received(:perform_async).once
     end
 
     it 'not a supported file' do
-      post '/import', "file" => Rack::Test::UploadedFile.new("spec/support/image.png", "text/csv")
+      post '/import', 'file' => Rack::Test::UploadedFile.new('spec/support/image.png', 'text/csv')
 
       expect(last_response.status).to eq 415
       expect(last_response.body).to include 'Arquivo não suportado'

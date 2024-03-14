@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'byebug'
 require 'pg'
 require 'rack/test'
@@ -22,14 +24,14 @@ RSpec.configure do |config|
 
   config.before(:all) do
     @conn = DBConnecterService.connect
-    @conn.exec("TRUNCATE TABLE patients, doctors, exams, tests;")
+    @conn.exec('TRUNCATE TABLE patients, doctors, exams, tests;')
   end
 
   config.after(:all) do
     @conn.close
   end
-  
+
   config.after(:each) do
-    @conn.exec("TRUNCATE TABLE patients, doctors, exams, tests;")
+    @conn.exec('TRUNCATE TABLE patients, doctors, exams, tests;')
   end
 end
