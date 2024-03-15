@@ -180,7 +180,7 @@ async function uploadFile(file) {
 
     setTimeout(() => {
       loadHomePage();
-    }, 5000);
+    }, 10000);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -232,5 +232,5 @@ function newDataCheck(rowCount) {
     } 
 
     flashMessage('Houve algum problema ao importar os dados.', 'error');
-  }, 6000);
+  }, 11000);
 }
