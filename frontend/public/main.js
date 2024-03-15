@@ -15,7 +15,6 @@ document.getElementById("import-form").addEventListener("submit", (event) => {
 
 
 async function loadHomePage() {
-  document.getElementById("import-data-page").style.display = 'none';
   exams = await loadExams();
   displayExams(exams);
 }
@@ -29,7 +28,7 @@ async function showHomePage() {
 
 async function loadExams() {
   response = await fetch('/tests');
-
+  if (response.status == 200) { document.getElementById('exam-table-body').innerHTML = ""; }
   return await response.json();
 }
 
@@ -163,7 +162,7 @@ function showImportDataPage() {
 }
 
 async function uploadFile(file) {
-  if (file.type != 'text/csv') { return flashMessage('Arquivo inválido', 'error')}
+  if (file.type != 'text/csv') { return flashMessage('Arquivo inválido', 'error')};
 
   const formData = new FormData();
   formData.append('file', file);
@@ -176,6 +175,12 @@ async function uploadFile(file) {
     const result = await response.json();
 
     importMessage(result);
+    
+    newDataCheck(getExamsTableRowCount());
+
+    setTimeout(() => {
+      loadHomePage();
+    }, 5000);
   } catch (error) {
     console.error("Error:", error);
   }
@@ -183,7 +188,7 @@ async function uploadFile(file) {
 
 function importMessage(message) {
   document.getElementById("import-file").value = "";
-  flashMessage('Arquivo em processamento.', 'processing')
+  flashMessage('Arquivo em processamento.', 'processing');
 
   showHomePage();
 }
@@ -211,5 +216,21 @@ function flashMessage(message, status) {
       flashMessage.classList.remove(status);
       flashMessageText.innerHTML = "";
     }, 300);
-  }, 5000);
+  }, 4700);
+}
+
+function getExamsTableRowCount() {
+  var table = document.getElementById("exams-table");
+  var rows = table.getElementsByTagName("tr");
+  return rows.length - 1
+}
+
+function newDataCheck(rowCount) {
+  setTimeout(() => {
+    if (getExamsTableRowCount() > rowCount) {
+      return flashMessage('Dados importados com sucesso.', 'success');
+    } 
+
+    flashMessage('Houve algum problema ao importar os dados.', 'error');
+  }, 6000);
 }
