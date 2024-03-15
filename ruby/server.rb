@@ -1,13 +1,14 @@
+# frozen_string_literal: true
+
 require 'sinatra'
 require 'csv'
 require 'pg'
-require 'byebug'
+
 require 'require_all'
 require_all 'models'
 require_all 'jobs'
 require_relative 'services/db_connecter_service'
 require_relative 'services/data_importer_service'
-
 
 conn = DBConnecterService.connect
 puts "connected to #{conn.db} database" if conn
@@ -16,8 +17,9 @@ get '/tests' do
   content_type 'application/json'
   response.headers['Access-Control-Allow-Origin'] = '*'
   exams = Exam.all(conn)
-  exams = exams.map {|exam| exam.hash_exam(conn)}
-  exams.to_json
+  exams = exams.map { |exam| exam.hash_exam(conn) }
+  sorted_exams = exams.sort_by { |exam| exam['date'] }.reverse
+  sorted_exams.to_json
 end
 
 get '/ping' do
@@ -42,9 +44,9 @@ post '/import' do
     return 415
   end
 
-  csv = CSV.read(params['file']['tempfile'], col_sep:';')
+  csv = CSV.read(params['file']['tempfile'], col_sep: ';')
   ImportJob.perform_async(csv)
- 
+
   response.body = 'Sua requisição está sendo processada'.to_json
   200
 end

@@ -2,13 +2,11 @@ require 'sinatra'
 require 'pg'
 require 'faraday'
 require 'faraday/multipart'
-require 'byebug'
 
 get '/' do
   content_type 'text/html'
   File.open('index.html')
 end
-
 
 get '/tests' do
   content_type 'application/json'
@@ -32,7 +30,8 @@ post '/import' do
 
   parameters = { file: Faraday::UploadIO.new(params['file']['tempfile'], 'text/csv') }
 
-  response = connection.post('/import', parameters)
+  faraday_response = connection.post('/import', parameters)
 
-  response.body
+  response.status = faraday_response.status
+  response.body = faraday_response.body
 end

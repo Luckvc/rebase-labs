@@ -1,0 +1,22 @@
+AllCops:
+  NewCops: disable
+  TargetRubyVersion: 3.3.23
+  Exclude:
+    - 'spec/spec_helper.rb'
+  SuggestExtensions: false
+
+
+Metrics/BlockLength:
+  AllowedMethods: ['describe', 'context', 'feature', 'scenario', 'let', 'it']
+  Exclude:
+    - 'spec/factories/**/*'
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Lint/MissingSuper:
+  Exclude:
+    - 'models/**/*'
