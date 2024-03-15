@@ -5,9 +5,11 @@ require 'pg'
 require 'rack/test'
 require 'sidekiq'
 require_relative '../services/db_connecter_service'
+require 'simplecov'
 
 ENV['RACK_ENV'] = 'test'
 Sidekiq.logger.warn!
+SimpleCov.start
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods

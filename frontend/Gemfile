@@ -4,6 +4,11 @@ gem 'faraday'
 gem 'faraday-multipart'
 gem 'puma'
 gem 'rackup'
-gem 'rspec'
-gem 'rubocop', require: false
 gem 'sinatra'
+
+
+group :test do
+  gem 'rspec'
+  gem 'rubocop', require: false
+end
+

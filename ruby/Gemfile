@@ -7,11 +7,12 @@ gem 'pg'
 gem 'puma'
 gem 'rackup'
 gem 'require_all'
-gem 'rubocop', require: false
 gem 'sidekiq'
 gem 'sinatra'
 
 group :test do
   gem 'rack-test'
   gem 'rspec'
+  gem 'rubocop', require: false
+  gem 'simplecov', require: false
 end
